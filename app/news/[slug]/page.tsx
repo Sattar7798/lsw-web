@@ -8,11 +8,7 @@ interface Props {
     }
 }
 
-export async function generateStaticParams() {
-    return newsData.map((post) => ({
-        slug: post.slug,
-    }))
-}
+export const runtime = 'edge';
 
 export default function NewsArticlePage({ params }: Props) {
     const news = newsData.find((item) => item.slug === params.slug)
