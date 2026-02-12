@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root Variables - Dark Mode (Default) */
+:root {
+  --deep-emerald: #1a4d2e;
+  --marble-white: #f8f9fa;
+  --ruby-red: #8b0000;
+  --matte-gold: #d4af37;
+  --turquoise-dark: #0d7377;
+  --charcoal: #1a1a1a;
+
+  /* Dark mode colors */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --text-primary: #f8f9fa;
+  --text-secondary: #d1d5db;
+  --border-color: rgba(212, 175, 55, 0.2);
+}
+
+/* Light Mode Variables */
+html.light {
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4b5563;
+  --border-color: rgba(26, 26, 26, 0.1);
+  --charcoal: #f8f9fa;
+  --marble-white: #1a1a1a;
+}
+
+/* Theme Transition */
+html,
+body,
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Persian Fonts */
+@font-face {
+  font-family: 'IranYekan';
+  src: url('/fonts/IranYekan.woff2') format('woff2'),
+    url('/fonts/IranYekan.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('/fonts/IranYekan-Bold.woff2') format('woff2'),
+    url('/fonts/IranYekan-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nastaliq';
+  src: url('/fonts/IranNastaliq.woff2') format('woff2'),
+    url('/fonts/IranNastaliq.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  direction: rtl;
+}
+
+body {
+  font-family: 'IranYekan', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-gold {
+  background: rgba(212, 175, 55, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.2);
+}
+
+/* Gold Gradient Text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #f4d03f 0%, #d4af37 50%, #b8941e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmering Effect */
+.shimmer {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth Transitions */
+.transition-smooth {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Scrollbar */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--charcoal);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.5);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.9);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Section Spacing */
+section {
+  min-height: 100vh;
+  position: relative;
+  padding: 4rem 2rem;
+}
+
+/* Container */
+.container-custom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Parallax Layer */
+.parallax-layer {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Button Base */
+.btn-primary {
+  @apply px-8 py-3 rounded-lg font-bold transition-smooth;
+  @apply bg-gradient-gold text-charcoal;
+  @apply hover:shadow-lg hover:shadow-matte-gold/50;
+  @apply active:scale-95;
+}
+
+.btn-outline {
+  @apply px-8 py-3 rounded-lg font-bold transition-smooth;
+  @apply border-2 border-matte-gold text-matte-gold;
+  @apply hover:bg-matte-gold hover:text-charcoal;
+  @apply active:scale-95;
+}
+
+/* Loading Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Responsive Typography */
+h1 {
+  @apply text-4xl md:text-6xl lg:text-7xl font-bold;
+}
+
+h2 {
+  @apply text-3xl md:text-5xl lg:text-6xl font-bold;
+}
+
+h3 {
+  @apply text-2xl md:text-4xl lg:text-5xl font-bold;
+}
+
+p {
+  @apply text-base md:text-lg lg:text-xl leading-relaxed;
+}
+
+/* Persian Nastaliq for Titles */
+.title-nastaliq {
+  font-family: 'Nastaliq', serif;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
