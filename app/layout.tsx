@@ -80,6 +80,9 @@ export const metadata: Metadata = {
     formatDetection: {
         telephone: false,
     },
+    other: {
+        'mobile-web-app-capable': 'yes',
+    },
 }
 
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
