@@ -13,7 +13,7 @@ export interface Poll {
 
 export const pollsData: Poll[] = [
     {
-        id: 'poll-001',
+        id: 'poll-system-v2',
         question: 'نوع نظام سیاسی مطلوب شما برای ایران آینده چیست؟',
         totalVotes: 0,
         options: [
@@ -24,7 +24,7 @@ export const pollsData: Poll[] = [
         ]
     },
     {
-        id: 'poll-002',
+        id: 'poll-interim-v2',
         question: 'مهم‌ترین اولویت دولت موقت در ۱۰۰ روز نخست؟',
         totalVotes: 0,
         options: [
