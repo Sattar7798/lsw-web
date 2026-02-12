@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
 export const runtime = 'edge';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
     try {
@@ -10,21 +13,31 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'No encrypted message provided' }, { status: 400 });
         }
 
-        // EDGE COMPATIBILITY NOTE:
-        // Nodemailer does not work in Edge Runtime (Cloudflare Pages).
-        // To send real emails, we would need to use an HTTP-based service like Resend, SendGrid, or MailChannels.
-        // For now, we are logging the request to the console (Mock Mode) to allow deployment to succeed.
+        const adminEmail = process.env.ADMIN_EMAIL || 'hedayatsattar@gmail.com';
 
-        console.log('--- Secure Message Received (Edge) ---');
-        console.log('Encrypted Payload Length:', encryptedMessage.length);
-        console.log('Attachments:', encryptedAttachments ? encryptedAttachments.length : 0);
-        console.log('To enable real emails, integration with an Edge-compatible email provider is required.');
-        console.log('--------------------------------------');
+        const { data, error } = await resend.emails.send({
+            from: 'Lion & Sun Secure <onboarding@resend.dev>',
+            to: adminEmail,
+            subject: 'New Encrypted Message',
+            html: `
+                <h3>New Encrypted Message Received</h3>
+                <p><strong>To Decrypt:</strong> Use your Private Key.</p>
+                <div style="background: #f4f4f4; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                    <pre style="white-space: pre-wrap; word-break: break-all; font-family: monospace; font-size: 12px;">${encryptedMessage}</pre>
+                </div>
+                <p><strong>Attachments:</strong> ${encryptedAttachments ? encryptedAttachments.length : 0}</p>
+            `,
+        });
 
-        return NextResponse.json({ message: 'Secure message received (Edge Mock Mode)' }, { status: 200 });
+        if (error) {
+            console.error('Resend Secure API Error:', error);
+            return NextResponse.json({ error: error.message || 'Secure message delivery failed' }, { status: 500 });
+        }
+
+        return NextResponse.json({ message: 'Secure message received', id: data?.id }, { status: 200 });
 
     } catch (error) {
-        console.error('Secure API Error:', error);
+        console.error('Secure API Critical Error:', error);
         return NextResponse.json({ error: 'Failed to process secure request' }, { status: 500 });
     }
 }

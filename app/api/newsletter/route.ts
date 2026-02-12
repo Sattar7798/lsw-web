@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
 export const runtime = 'edge';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
@@ -10,20 +13,24 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
-    // EDGE COMPATIBILITY NOTE:
-    // Nodemailer does not work in Edge Runtime (Cloudflare Pages).
-    // To send real emails, we would need to use an HTTP-based service like Resend, SendGrid, or MailChannels.
-    // For now, we are logging the request to the console (Mock Mode) to allow deployment to succeed.
+    const adminEmail = process.env.ADMIN_EMAIL || 'hedayatsattar@gmail.com';
 
-    console.log('--- Newsletter Subscription (Edge) ---');
-    console.log(`Email: ${email}`);
-    console.log('To enable real emails, integration with an Edge-compatible email provider is required.');
-    console.log('--------------------------------------');
+    const { data, error } = await resend.emails.send({
+      from: 'Lion & Sun <onboarding@resend.dev>',
+      to: adminEmail,
+      subject: 'New Newsletter Subscriber',
+      html: `<p>New subscriber joined: <strong>${email}</strong></p>`
+    });
 
-    return NextResponse.json({ message: 'Subscription successful (Edge Mock Mode)' }, { status: 200 });
+    if (error) {
+      console.error('Resend API Error:', error);
+      return NextResponse.json({ error: error.message || 'Email delivery failed' }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: 'Subscription successful', id: data?.id }, { status: 200 });
 
   } catch (error) {
-    console.error('Newsletter API Error:', error);
-    return NextResponse.json({ error: 'Failed to process request' }, { status: 500 });
+    console.error('Newsletter API Critical Error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
