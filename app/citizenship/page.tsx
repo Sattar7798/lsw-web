@@ -48,7 +48,7 @@ export default function CitizenshipPage() {
                 backgroundColor: null,
                 useCORS: true,
                 logging: false,
-            });
+            } as any);
             const link = document.createElement('a');
             link.download = `ParsID-${formData.name.replace(/\s+/g, '_')}.png`;
             link.href = canvas.toDataURL('image/png');
