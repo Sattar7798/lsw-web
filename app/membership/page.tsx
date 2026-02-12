@@ -183,7 +183,7 @@ export default function MembershipPage() {
                                                 backgroundColor: null, // Transparent background if needed, or stick to CSS
                                                 logging: false,
                                                 useCORS: true // For images
-                                            })
+                                            } as any)
                                             const link = document.createElement('a')
                                             link.download = `LionSun-ID-${idData.idNumber}.png`
                                             link.href = canvas.toDataURL('image/png')
