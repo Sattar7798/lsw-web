@@ -10,9 +10,9 @@ export function middleware(request: NextRequest) {
         default-src 'self';
         script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google.com https://www.gstatic.com;
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        img-src 'self' data: https: blob:;
+        img-src 'self' data: https: blob: https://www.transparenttextures.com;
         font-src 'self' https://fonts.gstatic.com;
-        connect-src 'self' https://api.telegram.org https://www.google.com https://www.gstatic.com;
+        connect-src 'self' https://api.telegram.org https://www.google.com https://www.gstatic.com https://www.transparenttextures.com;
         frame-src 'self' https://www.google.com;
         object-src 'none';
         base-uri 'self';

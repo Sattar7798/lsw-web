@@ -56,7 +56,7 @@ void main() {
 
 function Flag() {
     const mesh = useRef<THREE.Mesh>(null)
-    const texture = useTexture('/lion and sun flag.jpg')
+    const texture = useTexture('/lion-and-sun-flag.jpg')
 
     const uniforms = useMemo(() => ({
         uTime: { value: 0 },

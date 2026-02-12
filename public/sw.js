@@ -25,6 +25,11 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 }
 
+                // Only cache GET requests
+                if (event.request.method !== 'GET') {
+                    return fetch(event.request);
+                }
+
                 return fetch(event.request).then(
                     (response) => {
                         // Check if we received a valid response
@@ -50,6 +55,8 @@ self.addEventListener('fetch', (event) => {
                     if (event.request.mode === 'navigate') {
                         return caches.match('/offline');
                     }
+                    // Return reliable fallback or nothing to avoid "Failed to convert value to Response"
+                    return new Response(null, { status: 404, statusText: 'Offline' });
                 });
             })
     );
