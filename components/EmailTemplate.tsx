@@ -7,14 +7,22 @@ interface EmailTemplateProps {
 
 export const EmailTemplate: React.FC<EmailTemplateProps> = ({ content, subject }) => (
     <div style={{ fontFamily: 'Tahoma, Arial, sans-serif', maxWidth: '600px', margin: '0 auto', direction: 'rtl', backgroundColor: '#f9fafb', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-        {/* Header with Corner Logo */}
+        {/* Header with Logo on Left */}
         <div style={{ backgroundColor: '#1E3A8A', padding: '20px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '4px solid #FCD34D' }}>
             <div style={{ textAlign: 'right' }}>
                 <h1 style={{ color: '#FCD34D', margin: 0, fontSize: '20px', fontWeight: 'bold' }}>شیر و خورشید</h1>
                 <p style={{ color: '#e5e7eb', margin: '2px 0 0', fontSize: '12px' }}>حزب ایران نوین</p>
             </div>
-            {/* Placeholder for Logo Image - replaced text with a visual circle representation if no image is available, or keep text if preferred. User asked for "Logo in corner". */}
-            <div style={{ width: '40px', height: '40px', backgroundColor: '#FCD34D', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1E3A8A', fontWeight: 'bold', fontSize: '18px' }}>🦁</div>
+
+            {/* Logo Image */}
+            <div style={{ width: '50px', height: '50px', borderRadius: '50%', overflow: 'hidden', border: '2px solid #FCD34D' }}>
+                {/* Using the production URL for Cloudflare Pages. If the domain is custom, this should be updated. */}
+                <img
+                    src="https://lsw-web.pages.dev/logo.jpg"
+                    alt="Lion & Sun Logo"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+            </div>
         </div>
 
         <div style={{ padding: '40px 30px', backgroundColor: '#ffffff', minHeight: '200px' }}>
