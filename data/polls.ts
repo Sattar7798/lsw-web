@@ -15,21 +15,22 @@ export const pollsData: Poll[] = [
     {
         id: 'poll-001',
         question: 'نوع نظام سیاسی مطلوب شما برای ایران آینده چیست؟',
-        totalVotes: 12540,
+        totalVotes: 0,
         options: [
-            { id: 'opt-1', text: 'جمهوری سکولار', votes: 5120 },
-            { id: 'opt-2', text: 'پادشاهی مشروطه', votes: 6380 },
-            { id: 'opt-3', text: 'فدرالیسم', votes: 1040 }
+            { id: 'opt-monarchy-const', text: 'پادشاهی مشروطه', votes: 0 },
+            { id: 'opt-monarchy-hered', text: 'پادشاهی موروثی', votes: 0 },
+            { id: 'opt-monarchy-elect', text: 'پادشاهی انتخابی', votes: 0 },
+            { id: 'opt-republic', text: 'جمهوری', votes: 0 }
         ]
     },
     {
         id: 'poll-002',
         question: 'مهم‌ترین اولویت دولت موقت در ۱۰۰ روز نخست؟',
-        totalVotes: 8900,
+        totalVotes: 0,
         options: [
-            { id: 'opt-4', text: 'تثبیت نرخ ارز و اقتصاد', votes: 3200 },
-            { id: 'opt-5', text: 'محاکمه سران رژیم', votes: 4100 },
-            { id: 'opt-6', text: 'آزادی زندانیان سیاسی', votes: 1600 }
+            { id: 'opt-economy', text: 'تثبیت نرخ ارز و اقتصاد', votes: 0 },
+            { id: 'opt-justice', text: 'محاکمه سران رژیم', votes: 0 },
+            { id: 'opt-prisoners', text: 'آزادی زندانیان سیاسی', votes: 0 }
         ]
     }
 ];

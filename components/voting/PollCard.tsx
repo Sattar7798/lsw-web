@@ -10,33 +10,85 @@ export default function PollCard({ poll }: { poll: Poll }) {
     const [results, setResults] = useState(poll.options)
     const [total, setTotal] = useState(poll.totalVotes)
 
-    // Check if already voted on mount
+    // Fetch real-time votes on mount
     useEffect(() => {
-        const hasVoted = localStorage.getItem(`voted_${poll.id}`)
+        const fetchVotes = async () => {
+            try {
+                const res = await fetch('/api/vote');
+                const data = await res.json();
+
+                // Update results with real data from server
+                if (data) {
+                    const newResults = poll.options.map(opt => ({
+                        ...opt,
+                        votes: data[opt.id] !== undefined ? data[opt.id] : opt.votes
+                    }));
+                    setResults(newResults);
+
+                    // Recalculate total
+                    const newTotal = newResults.reduce((acc, curr) => acc + curr.votes, 0);
+                    setTotal(newTotal);
+                }
+            } catch (error) {
+                console.error('Failed to fetch votes', error);
+            }
+        };
+
+        fetchVotes();
+
+        // Check local storage only for UI state (voted status), but trust server for counts
+        const hasVoted = localStorage.getItem(`voted_${poll.id}`);
         if (hasVoted) {
-            setVoted(true)
-            setSelectedOption(hasVoted)
+            setVoted(true);
+            setSelectedOption(hasVoted);
         }
-    }, [poll.id])
+    }, [poll.id, poll.options]);
 
-    const handleVote = (optionId: string) => {
-        if (voted) return
+    const handleVote = async (optionId: string) => {
+        if (voted) return;
 
-        // Simulate network delay
-        setTimeout(() => {
-            // Update local state (Optimistic UI)
-            const newResults = results.map(opt =>
-                opt.id === optionId ? { ...opt, votes: opt.votes + 1 } : opt
-            )
-            setResults(newResults)
-            setTotal(total + 1)
-            setVoted(true)
-            setSelectedOption(optionId)
+        // Optimistic UI update
+        const previousResults = [...results];
+        const previousTotal = total;
 
-            // Persist
-            localStorage.setItem(`voted_${poll.id}`, optionId)
-        }, 800)
-    }
+        const newResults = results.map(opt =>
+            opt.id === optionId ? { ...opt, votes: opt.votes + 1 } : opt
+        );
+        setResults(newResults);
+        setTotal(total + 1);
+        setVoted(true);
+        setSelectedOption(optionId);
+
+        try {
+            const res = await fetch('/api/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ pollId: poll.id, optionId })
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                alert(data.error || 'Vote failed');
+                // Revert state if failed
+                setResults(previousResults);
+                setTotal(previousTotal);
+                setVoted(false);
+                setSelectedOption(null);
+                return;
+            }
+
+            // Persist local state
+            localStorage.setItem(`voted_${poll.id}`, optionId);
+
+        } catch (error) {
+            console.error('Vote submission error', error);
+            // Revert state
+            setResults(previousResults);
+            setTotal(previousTotal);
+            setVoted(false);
+            setSelectedOption(null);
+        }
+    };
 
     return (
         <div className="bg-[#292524] border border-[#d4af37]/20 rounded-xl p-6 shadow-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.1)] transition-all duration-300 group">
@@ -56,8 +108,8 @@ export default function PollCard({ poll }: { poll: Poll }) {
                                 onClick={() => handleVote(option.id)}
                                 disabled={voted}
                                 className={`w-full relative h-14 rounded-lg border overflow-hidden transition-all duration-300 ${voted
-                                        ? 'border-transparent bg-black/20 cursor-default'
-                                        : 'border-white/10 bg-white/5 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 cursor-pointer'
+                                    ? 'border-transparent bg-black/20 cursor-default'
+                                    : 'border-white/10 bg-white/5 hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 cursor-pointer'
                                     }`}
                             >
                                 {/* Progress Bar (Only visible if voted) */}
@@ -67,8 +119,8 @@ export default function PollCard({ poll }: { poll: Poll }) {
                                         animate={{ width: `${percentage}%` }}
                                         transition={{ duration: 1, ease: "easeOut" }}
                                         className={`absolute top-0 bottom-0 right-0 h-full ${isSelected
-                                                ? 'bg-gradient-to-l from-[#d4af37] to-[#b4941f]'
-                                                : 'bg-white/10'
+                                            ? 'bg-gradient-to-l from-[#d4af37] to-[#b4941f]'
+                                            : 'bg-white/10'
                                             }`}
                                     />
                                 )}
