@@ -37,33 +37,7 @@ body,
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Persian Fonts */
-@font-face {
-  font-family: 'IranYekan';
-  src: url('/fonts/IranYekan.woff2') format('woff2'),
-    url('/fonts/IranYekan.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 
-@font-face {
-  font-family: 'IranYekan';
-  src: url('/fonts/IranYekan-Bold.woff2') format('woff2'),
-    url('/fonts/IranYekan-Bold.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Nastaliq';
-  src: url('/fonts/IranNastaliq.woff2') format('woff2'),
-    url('/fonts/IranNastaliq.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* Base Styles */
 * {

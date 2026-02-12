@@ -21,8 +21,8 @@ module.exports = {
                 'charcoal': '#1a1a1a',
             },
             fontFamily: {
-                iranyekan: ['IranYekan', 'sans-serif'],
-                nastaliq: ['Nastaliq', 'serif'],
+                sans: ['var(--font-vazirmatn)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                nastaliq: ['var(--font-lalezar)', 'serif'], // Keeping 'nastaliq' class name for backward compatibility but mapping to Lalezar
             },
             backgroundImage: {
                 'gradient-gold': 'linear-gradient(135deg, #f4d03f 0%, #d4af37 50%, #b8941e 100%)',

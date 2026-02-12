@@ -4,6 +4,21 @@ import NavigationMenu from '@/components/NavigationMenu'
 import ReCaptchaProvider from '@/components/ReCaptchaProvider'
 import ClientProviders from '@/components/ClientProviders'
 
+import { Vazirmatn, Lalezar } from 'next/font/google'
+
+const vazirmatn = Vazirmatn({
+    subsets: ['arabic'],
+    display: 'swap',
+    variable: '--font-vazirmatn',
+})
+
+const lalezar = Lalezar({
+    weight: '400',
+    subsets: ['arabic'],
+    display: 'swap',
+    variable: '--font-lalezar',
+})
+
 export const metadata: Metadata = {
     title: {
         default: 'اپوزیسیون شیر و خورشید | نماد مبارزه برای ایران آزاد',
@@ -75,7 +90,7 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="fa" dir="rtl">
+        <html lang="fa" dir="rtl" className={`${vazirmatn.variable} ${lalezar.variable}`}>
             <body className="font-sans antialiased">
                 <ServiceWorkerRegister />
                 <ClientProviders>
