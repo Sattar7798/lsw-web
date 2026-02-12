@@ -186,7 +186,6 @@ export default function VolunteerForm() {
                 ) : (
                     <button
                         type="submit"
-                        disabled={status === 'encrypting'}
                         className="w-full bg-gradient-to-l from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-900/20 active:scale-[0.98]"
                     >
                         🔒 رمزنگاری و ثبت اعلام آمادگی
