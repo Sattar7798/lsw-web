@@ -4,9 +4,9 @@ import { useState, useEffect } from 'react'
 import * as openpgp from 'openpgp'
 import { motion } from 'framer-motion'
 
-export default function VolunteerForm() {
+export default function VolunteerForm(props: { defaultSpecialty?: string }) {
     const [formData, setFormData] = useState({
-        specialty: 'برنامه‌نویسی / IT',
+        specialty: props.defaultSpecialty || 'برنامه‌نویسی / IT',
         availability: 'تمام وقت',
         contact: '',
         description: ''
@@ -123,6 +123,7 @@ export default function VolunteerForm() {
                             className="w-full bg-black/50 border border-white/10 rounded-lg p-3 focus:border-blue-500 transition-colors"
                         >
                             <option>برنامه‌نویسی / IT</option>
+                            <option>خبرنگار / اصحاب رسانه</option>
                             <option>ترجمه / تولید محتوا</option>
                             <option>گرافیک / تدوین</option>
                             <option>حقوق / وکالت</option>

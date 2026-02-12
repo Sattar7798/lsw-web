@@ -5,11 +5,14 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import { useSafeMode } from '@/components/SafeModeProvider'
+
 export default function NavigationMenu() {
     const [isOpen, setIsOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
     const pathname = usePathname()
+    const { incrementClick } = useSafeMode()
 
     // Handle scroll effect
     useEffect(() => {
@@ -22,8 +25,10 @@ export default function NavigationMenu() {
 
     const mainLinks = [
         { name: 'خانه', href: '/' },
+        { name: 'دولت موقت', href: '/cabinet' },
+        { name: 'امور بین‌الملل', href: '/diplomatic' },
         { name: 'اخبار', href: '/news' },
-        { name: 'کتابخانه اسناد', href: '/documents' },
+        { name: 'کتابخانه ملی', href: '/library' },
     ]
 
     const dropdowns = {
@@ -31,8 +36,8 @@ export default function NavigationMenu() {
             title: 'مشارکت',
             items: [
                 { name: '🗳️ صندوق رأی', href: '/voting' },
-                { name: '🆔 عضویت', href: '/membership' },
-                { name: '🗺️ نقشه ایران', href: '/iran-map' },
+                { name: '🆔 کارت شهروندی (پارس)', href: '/citizenship' },
+                { name: '🚩 شبکه شیر و خورشید', href: '/iran-map' },
             ]
         },
         movement: {
@@ -45,21 +50,23 @@ export default function NavigationMenu() {
         }
     }
 
-    // Hide navigation on secure page
-    if (pathname === '/secure') return null
+    // Hide navigation on secure page using CSS to avoid hydration mismatch
+    const isSecurePage = pathname === '/secure'
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${scrolled
-                ? 'bg-[#1c1917]/90 backdrop-blur-xl border-b border-[#d4af37]/30 shadow-2xl py-2'
-                : 'bg-transparent py-4'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isSecurePage ? 'hidden' : ''
+                } ${scrolled
+                    ? 'bg-[#1c1917]/90 backdrop-blur-xl border-b border-[#d4af37]/30 shadow-2xl py-2'
+                    : 'bg-transparent py-4'
                 }`}
             onMouseLeave={() => setActiveDropdown(null)}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo Section */}
-                    <Link href="/" className="flex items-center gap-4 group relative z-50">
+                    {/* Safe Mode Trigger: Click 3 times to activate */}
+                    <div onClick={(e) => { e.preventDefault(); incrementClick(); }} className="cursor-pointer flex items-center gap-4 group relative z-50">
                         <div className="relative">
                             <div className="absolute -inset-1 bg-gradient-to-r from-[#d4af37] to-yellow-600 rounded-full opacity-0 group-hover:opacity-75 blur transition duration-500"></div>
                             <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#d4af37]/50 group-hover:ring-[#d4af37] transition-all duration-500 shadow-lg shadow-[#d4af37]/20">
@@ -78,7 +85,7 @@ export default function NavigationMenu() {
                                 اپوزیسیون شیر و خورشید
                             </span>
                         </div>
-                    </Link>
+                    </div>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center gap-2 bg-white/5 backdrop-blur-sm p-1.5 rounded-full border border-white/10 shadow-inner">
@@ -154,9 +161,7 @@ export default function NavigationMenu() {
                                 <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
                                 تماس امن
                             </Link>
-                            <Link href="/en" className="text-xs font-bold text-[#d4af37] hover:text-white transition-colors px-2">
-                                EN
-                            </Link>
+
                         </div>
 
                     </div>
@@ -214,8 +219,8 @@ export default function NavigationMenu() {
                                                 href={item.href}
                                                 onClick={() => setIsOpen(false)}
                                                 className={`block px-4 py-3 rounded-lg text-base font-medium transition-all ${pathname === item.href
-                                                        ? 'bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/20'
-                                                        : 'text-gray-300 hover:bg-white/5'
+                                                    ? 'bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/20'
+                                                    : 'text-gray-300 hover:bg-white/5'
                                                     }`}
                                             >
                                                 {item.name}
@@ -238,8 +243,8 @@ export default function NavigationMenu() {
                                                         href={item.href}
                                                         onClick={() => setIsOpen(false)}
                                                         className={`block px-4 py-3 rounded-lg text-base font-medium transition-all ${pathname === item.href
-                                                                ? 'bg-[#d4af37]/10 text-[#d4af37]'
-                                                                : 'text-gray-400 hover:text-gray-200'
+                                                            ? 'bg-[#d4af37]/10 text-[#d4af37]'
+                                                            : 'text-gray-400 hover:text-gray-200'
                                                             }`}
                                                     >
                                                         {item.name}

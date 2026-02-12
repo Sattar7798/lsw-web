@@ -6,8 +6,16 @@ import SecureLayout from '@/components/secure/SecureLayout'
 import WhistleblowerForm from '@/components/secure/WhistleblowerForm'
 import VolunteerForm from '@/components/secure/VolunteerForm'
 
+import { useSearchParams } from 'next/navigation'
+
 export default function SecurePage() {
-    const [activeTab, setActiveTab] = useState<'whistleblower' | 'volunteer'>('whistleblower')
+    const searchParams = useSearchParams()
+    const type = searchParams.get('type') // 'credentials'
+
+    // Default to volunteer if type is credentials
+    const [activeTab, setActiveTab] = useState<'whistleblower' | 'volunteer'>(
+        type === 'credentials' ? 'volunteer' : 'whistleblower'
+    )
 
     return (
         <SecureLayout>
@@ -16,8 +24,8 @@ export default function SecurePage() {
                     <button
                         onClick={() => setActiveTab('whistleblower')}
                         className={`px-6 py-2 rounded-full transition-all text-sm font-bold ${activeTab === 'whistleblower'
-                                ? 'bg-red-600 text-white shadow-lg'
-                                : 'text-gray-400 hover:text-white'
+                            ? 'bg-red-600 text-white shadow-lg'
+                            : 'text-gray-400 hover:text-white'
                             }`}
                     >
                         صدای مردم 📢
@@ -25,8 +33,8 @@ export default function SecurePage() {
                     <button
                         onClick={() => setActiveTab('volunteer')}
                         className={`px-6 py-2 rounded-full transition-all text-sm font-bold ${activeTab === 'volunteer'
-                                ? 'bg-blue-600 text-white shadow-lg'
-                                : 'text-gray-400 hover:text-white'
+                            ? 'bg-blue-600 text-white shadow-lg'
+                            : 'text-gray-400 hover:text-white'
                             }`}
                     >
                         همکاری داوطلبانه 🤝
@@ -40,7 +48,10 @@ export default function SecurePage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3 }}
             >
-                {activeTab === 'whistleblower' ? <WhistleblowerForm /> : <VolunteerForm />}
+                {activeTab === 'whistleblower'
+                    ? <WhistleblowerForm />
+                    : <VolunteerForm defaultSpecialty={type === 'credentials' ? 'خبرنگار / اصحاب رسانه' : undefined} />
+                }
             </motion.div>
         </SecureLayout>
     )

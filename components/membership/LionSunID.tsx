@@ -42,7 +42,7 @@ export default function LionSunID({ name, province, idNumber, joinDate, skills }
             <div className="absolute inset-0 p-6 flex flex-col justify-between z-10 w-full h-full">
 
                 {/* Header */}
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start" dir="rtl">
                     <div className="flex items-center gap-3">
                         {/* Logo */}
                         <div className="relative w-12 h-12 rounded-full border border-[#d4af37]/50 shadow-[0_0_15px_rgba(212,175,55,0.3)] bg-black/50 overflow-hidden">
@@ -51,12 +51,12 @@ export default function LionSunID({ name, province, idNumber, joinDate, skills }
                                 style={{ backgroundImage: 'url(/logo.jpg)' }}
                             />
                         </div>
-                        <div>
+                        <div className="text-right">
                             <h3 className="text-[#fcf6ba] font-bold text-base tracking-wide font-sans leading-none mb-1 shadow-black drop-shadow-md">
-                                LION & SUN
+                                شیر و خورشید
                             </h3>
-                            <p className="text-[#d4af37] text-[9px] uppercase tracking-[0.25em] font-medium">
-                                Resistance ID
+                            <p className="text-[#d4af37] text-[10px] uppercase tracking-wider font-medium font-vazir">
+                                کارت شناسایی مقاومت
                             </p>
                         </div>
                     </div>
@@ -70,17 +70,17 @@ export default function LionSunID({ name, province, idNumber, joinDate, skills }
                 </div>
 
                 {/* Data Fields */}
-                <div className="flex flex-col gap-4 mt-2 pl-1">
+                <div className="flex flex-col gap-4 mt-2 pr-1" dir="rtl">
                     <div className="flex gap-8">
                         <div>
-                            <p className="text-[#64748b] text-[8px] uppercase tracking-wider mb-0.5">Name</p>
-                            <p className="text-white font-bold text-lg font-mono leading-none tracking-tight drop-shadow-md">
-                                {name || 'UNKNOWN'}
+                            <p className="text-[#64748b] text-[10px] mb-0.5 font-vazir">نام / نام مستعار</p>
+                            <p className="text-white font-bold text-lg font-vazir leading-none tracking-tight drop-shadow-md">
+                                {name || 'ناشناس'}
                             </p>
                         </div>
                         <div>
-                            <p className="text-[#64748b] text-[8px] uppercase tracking-wider mb-0.5">Province</p>
-                            <p className="text-white font-medium text-sm font-mono leading-none mt-1">
+                            <p className="text-[#64748b] text-[10px] mb-0.5 font-vazir">استان / منطقه</p>
+                            <p className="text-white font-medium text-sm font-vazir leading-none mt-1">
                                 {province || '---'}
                             </p>
                         </div>
@@ -88,16 +88,16 @@ export default function LionSunID({ name, province, idNumber, joinDate, skills }
 
                     <div className="flex justify-between items-end">
                         <div>
-                            <p className="text-[#64748b] text-[8px] uppercase tracking-wider mb-0.5">ID Number</p>
-                            <p className="text-[#d4af37] font-mono text-xs tracking-widest shadow-black drop-shadow-sm">
+                            <p className="text-[#64748b] text-[10px] mb-0.5 font-vazir">شماره شناسایی</p>
+                            <p className="text-[#d4af37] font-mono text-xs tracking-widest shadow-black drop-shadow-sm dir-ltr text-left">
                                 {idNumber}
                             </p>
                         </div>
 
-                        <div className="text-right">
-                            <p className="text-[#64748b] text-[8px] uppercase tracking-wider mb-0.5">Skill Set</p>
-                            <div className="bg-[#d4af37]/10 border border-[#d4af37]/30 px-2 py-1 rounded text-[9px] text-[#d4af37] font-bold">
-                                {skills || 'GENERAL'}
+                        <div className="text-left">
+                            <p className="text-[#64748b] text-[10px] mb-0.5 font-vazir">سطح دسترسی</p>
+                            <div className="bg-[#d4af37]/10 border border-[#d4af37]/30 px-2 py-1 rounded text-[10px] text-[#d4af37] font-bold font-vazir">
+                                {skills || 'مبارز آزادی'}
                             </div>
                         </div>
                     </div>

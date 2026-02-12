@@ -83,6 +83,7 @@ export const metadata: Metadata = {
 }
 
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
+import { SafeModeProvider } from '@/components/SafeModeProvider'
 
 export default function RootLayout({
     children,
@@ -93,14 +94,16 @@ export default function RootLayout({
         <html lang="fa" dir="rtl" className={`${vazirmatn.variable} ${lalezar.variable}`}>
             <body className="font-sans antialiased">
                 <ServiceWorkerRegister />
-                <ClientProviders>
-                    <ReCaptchaProvider>
-                        <NavigationMenu />
-                        <div className="pt-16">
-                            {children}
-                        </div>
-                    </ReCaptchaProvider>
-                </ClientProviders>
+                <SafeModeProvider>
+                    <ClientProviders>
+                        <ReCaptchaProvider>
+                            <NavigationMenu />
+                            <div className="pt-16">
+                                {children}
+                            </div>
+                        </ReCaptchaProvider>
+                    </ClientProviders>
+                </SafeModeProvider>
             </body>
         </html>
     )

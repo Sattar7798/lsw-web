@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export default function LeaderSection() {
     const [isPlaying, setIsPlaying] = useState(false)
@@ -148,9 +149,9 @@ export default function LeaderSection() {
                             <button className="btn-primary">
                                 درباره رهبر
                             </button>
-                            <button className="btn-outline">
+                            <Link href="/contact" className="btn-outline inline-block text-center pt-3">
                                 تماس با ما
-                            </button>
+                            </Link>
                         </div>
                     </motion.div>
                 </div>

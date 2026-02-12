@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export default function VisionSection() {
     const [sliderValue, setSliderValue] = useState(0)
@@ -107,9 +108,11 @@ export default function VisionSection() {
                         <p className="text-2xl md:text-3xl text-marble-white leading-relaxed title-nastaliq mb-6">
                             «این آینده در دسترس است - فقط به اراده ما نیاز دارد»
                         </p>
-                        <button className="btn-primary text-lg px-12 py-4">
-                            به ما بپیوندید
-                        </button>
+                        <Link href="/secure">
+                            <button className="btn-primary text-lg px-12 py-4">
+                                به ما بپیوندید
+                            </button>
+                        </Link>
                     </div>
                 </motion.div>
             </div>

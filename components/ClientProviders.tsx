@@ -6,7 +6,7 @@ import ThemeToggle from './ThemeToggle'
 export default function ClientProviders({ children }: { children: React.ReactNode }) {
     return (
         <ThemeProvider>
-            <ThemeToggle />
+            {/* <ThemeToggle /> Removed per user request */}
             {children}
         </ThemeProvider>
     )
