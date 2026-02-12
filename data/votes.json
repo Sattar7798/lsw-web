@@ -1,0 +1,15 @@
+{
+    "votes": {
+        "opt-monarchy-const": 0,
+        "opt-monarchy-hered": 0,
+        "opt-monarchy-elect": 0,
+        "opt-republic": 0,
+        "opt-economy": 0,
+        "opt-justice": 0,
+        "opt-prisoners": 0
+    },
+    "ips": {
+        "poll-system-v2": [],
+        "poll-interim-v2": []
+    }
+}
