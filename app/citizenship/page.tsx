@@ -21,9 +21,12 @@ export default function CitizenshipPage() {
 
         // 1. Register the "Real" ID generation
         try {
-            await fetch('/api/stats', { method: 'POST' });
+            console.log('📊 Sending stats POST request...');
+            const response = await fetch('/api/stats', { method: 'POST' });
+            const data = await response.json();
+            console.log('✅ Stats response:', data);
         } catch (e) {
-            console.error('Failed to register stat', e);
+            console.error('❌ Failed to register stat', e);
         }
 
         // Simulate "Processing" with a delay
