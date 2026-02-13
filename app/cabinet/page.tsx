@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { cabinetData } from '@/data/cabinet'
 import MemberCard from '@/components/cabinet/MemberCard'
 import WavingFlag from '@/components/WavingFlag'
+import Image from 'next/image'
 
 export default function CabinetPage() {
     return (
@@ -32,8 +33,14 @@ export default function CabinetPage() {
                         transition={{ duration: 0.8 }}
                         className="inline-block mb-6 relative z-10"
                     >
-                        <div className="w-24 h-24 mx-auto border-2 border-[#1f2937] rounded-full flex items-center justify-center bg-black/50 backdrop-blur-sm relative shadow-2xl">
-                            <span className="text-5xl grayscale opacity-70">🏛️</span>
+                        <div className="w-32 h-32 mx-auto border-4 border-[#c5a059]/40 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-sm relative shadow-2xl overflow-hidden group transition-all hover:border-[#c5a059] hover:shadow-[0_0_30px_rgba(197,160,89,0.3)]">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-[#c5a059]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                            <Image
+                                src="/logo.jpg"
+                                alt="هویت ملی"
+                                fill
+                                className="object-cover scale-110 hover:scale-125 transition-transform duration-700"
+                            />
                         </div>
                     </motion.div>
 
@@ -43,7 +50,7 @@ export default function CabinetPage() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-6xl md:text-8xl font-nastaliq text-[#e0dacd] mb-6 drop-shadow-2xl relative z-10"
                     >
-                        دولت موقت
+                        حزب ملی
                     </motion.h1>
 
                     <motion.p
@@ -52,7 +59,7 @@ export default function CabinetPage() {
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="text-xl text-[#8a8175] max-w-2xl mx-auto font-light tracking-wide leading-relaxed relative z-10"
                     >
-                        ساختار اجرایی دولت موقت برای مدیریت دوران گذار.
+                        ساختار اجرایی حزب ملی برای مدیریت دوران گذار.
                         <br />
                         <span className="text-red-900/60 text-sm mt-2 block font-mono tracking-widest uppercase">
                             [ CONFIDENTIAL - LEVEL 4 CLEARANCE ]

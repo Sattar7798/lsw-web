@@ -25,7 +25,7 @@ export default function NavigationMenu() {
 
     const mainLinks = [
         { name: 'خانه', href: '/' },
-        { name: 'دولت موقت', href: '/cabinet' },
+        { name: 'حزب ملی', href: '/cabinet' },
         { name: 'امور بین‌الملل', href: '/diplomatic' },
         { name: 'اخبار', href: '/news' },
         { name: 'کتابخانه ملی', href: '/library' },

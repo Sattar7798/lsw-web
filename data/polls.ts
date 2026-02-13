@@ -25,7 +25,7 @@ export const pollsData: Poll[] = [
     },
     {
         id: 'poll-interim-v2',
-        question: 'مهم‌ترین اولویت دولت موقت در ۱۰۰ روز نخست؟',
+        question: 'مهم‌ترین اولویت حزب ملی در ۱۰۰ روز نخست؟',
         totalVotes: 0,
         options: [
             { id: 'opt-economy', text: 'تثبیت نرخ ارز و اقتصاد', votes: 0 },

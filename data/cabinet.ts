@@ -15,7 +15,7 @@ export const cabinetData: CabinetMember[] = [
     {
         id: 'pm',
         name: 'شورای گذار',
-        role: 'رهبری دولت موقت',
+        role: 'رهبری حزب ملی',
         bio: 'نهاد عالی تصمیم‌گیری متشکل از نمایندگان احزاب و متخصصین برجسته برای مدیریت دوران گذار ۱۰۰ روزه.',
         imageUrl: '/images/council-placeholder.jpg',
         priorities: ['برگزاری رفراندوم', 'انحلال نهادهای سرکوب', 'تامین امنیت عمومی'],

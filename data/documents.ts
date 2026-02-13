@@ -30,7 +30,7 @@ export const documentsData: DocumentItem[] = [
     },
     {
         id: 'doc-003',
-        title: 'برنامه ۱۰۰ روزه دولت موقت',
+        title: 'برنامه ۱۰۰ روزه حزب ملی',
         description: 'نقشه راه اجرایی برای سه ماهه نخست پس از فروپاشی جمهوری اسلامی برای تثبیت اوضاع.',
         type: 'Report',
         publishDate: '۱۴۰۳/۱۲/۱۵',

@@ -28,7 +28,7 @@ export default function Letterhead({ children }: { children: React.ReactNode }) 
 
                 <div className="text-right w-1/3">
                     <h2 className="text-2xl font-bold text-gray-900 font-nastaliq mb-1">
-                        دولت موقت ایران
+                        حزب ملی ایران
                     </h2>
                     <p className="text-sm text-[#c5a059] font-nastaliq">
                         شورای عالی گذار

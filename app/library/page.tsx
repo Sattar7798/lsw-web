@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Book3D from '@/components/library/Book3D'
 import { libraryData, Book } from '@/data/library'
 import { documentsData } from '@/data/documents'
+import Image from 'next/image'
 
 const categories = ['All', 'History', 'Politics', 'Literature', 'Philosophy']
 
@@ -35,8 +36,14 @@ export default function LibraryPage() {
                         transition={{ duration: 0.8 }}
                         className="inline-block mb-6"
                     >
-                        <div className="w-24 h-24 mx-auto border-2 border-[#c5a059] rounded-full flex items-center justify-center bg-black/50 backdrop-blur-sm relative shadow-[0_0_30px_rgba(197,160,89,0.2)]">
-                            <span className="text-5xl drop-shadow-lg">📚</span>
+                        <div className="w-28 h-28 mx-auto border-4 border-[#c5a059]/40 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-sm relative shadow-2xl overflow-hidden group transition-all hover:border-[#c5a059] hover:shadow-[0_0_30px_rgba(197,160,89,0.3)]">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-[#c5a059]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                            <Image
+                                src="/logo.jpg"
+                                alt="هویت ملی"
+                                fill
+                                className="object-cover scale-110 hover:scale-125 transition-transform duration-700"
+                            />
                         </div>
                     </motion.div>
 
@@ -104,9 +111,44 @@ export default function LibraryPage() {
                 )}
 
                 {/* Footer Decor */}
-                <div className="mt-40 text-center opacity-30">
-                    <div className="w-full h-px bg-gradient-to-r from-transparent via-[#c5a059] to-transparent mb-8"></div>
-                    <span className="text-6xl grayscale">🦁</span>
+                {/* Featured Video Section */}
+                <div className="mt-40 mb-32 relative z-10 px-4">
+                    <div className="w-full h-px bg-gradient-to-r from-transparent via-[#c5a059]/50 to-transparent mb-16"></div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="max-w-5xl mx-auto"
+                    >
+                        <div className="relative group">
+                            {/* Frame Effects */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-[#c5a059] via-[#f3e5b5] to-[#c5a059] opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-700"></div>
+
+                            <div className="relative rounded-xl overflow-hidden border border-[#c5a059]/30 bg-black/80 shadow-2xl">
+                                {/* Cinema Borders */}
+                                <div className="absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-black/80 to-transparent z-10 pointer-events-none"></div>
+                                <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10 pointer-events-none"></div>
+
+                                <video
+                                    src="/book.MOV"
+                                    controls
+                                    className="w-full h-auto max-h-[70vh] object-contain mx-auto"
+                                    style={{ boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5)' }}
+                                >
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+
+                            {/* Decorative Caption */}
+                            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-max text-center">
+                                <div className="text-[#c5a059] font-nastaliq text-3xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                                    جلوه‌های ماندگار
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
 
                 {/* National Archives Section (Restored) */}
