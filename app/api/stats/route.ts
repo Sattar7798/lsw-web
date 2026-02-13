@@ -2,15 +2,16 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'edge';
 
-// Cloudflare KV binding will be available in production
-// @ts-ignore - KV binding is injected at runtime by Cloudflare
-const KV = typeof process.env.STATS_KV !== 'undefined' ? process.env.STATS_KV : null;
-
 // Fallback to in-memory for local dev
 let localCounter = 0;
 
 export async function GET(request: Request) {
     try {
+        // Access Cloudflare KV binding from the runtime
+        // @ts-ignore - Cloudflare binding
+        const env = request.cf?.env || (globalThis as any).STATS_KV;
+        const KV = env?.STATS_KV;
+
         // Try to get from KV first (production)
         if (KV && typeof KV.get === 'function') {
             const count = await KV.get('total_resistance_ids');
@@ -28,6 +29,11 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     try {
         let newCount = 1;
+
+        // Access Cloudflare KV binding from the runtime
+        // @ts-ignore - Cloudflare binding
+        const env = request.cf?.env || (globalThis as any).STATS_KV;
+        const KV = env?.STATS_KV;
 
         // Try to use KV first (production)
         if (KV && typeof KV.get === 'function' && typeof KV.put === 'function') {
