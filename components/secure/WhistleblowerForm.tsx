@@ -57,11 +57,33 @@ export default function WhistleblowerForm() {
                 encryptionKeys: parsedPublicKey
             })
 
-            // Mocking file encryption for now (would need to convert files to base64, encrypt large payloads differently)
-            // For MVP, we send filenames in the body
-            if (files.length > 0) {
-                log(`> Encrypting ${files.length} file metadata...`)
-            }
+            // Process files: Read as Base64
+            const processedFiles = await Promise.all(
+                files.map(async (file) => {
+                    return new Promise<{ filename: string; content: string; type: string }>((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = () => {
+                            // Helper to remove data URL prefix (e.g. "data:image/png;base64,")
+                            const result = reader.result as string;
+                            // Resend expects header-less base64 or buffer. 
+                            // Actually Resend 'content' can be a base64 string if we handle it right, 
+                            // but safest is usually to send the full data URI or just the headers.
+                            // Let's send the full data URI and handle in backend? 
+                            // Or better: Buffer.from(base64) in backend.
+                            // Let's send the whole string.
+                            resolve({
+                                filename: file.name,
+                                content: result,
+                                type: file.type
+                            });
+                        };
+                        reader.onerror = error => reject(error);
+                    });
+                })
+            );
+
+            log(`> Prepared ${processedFiles.length} files for transmission...`);
 
             log('> Establishing Secure Tunnel...')
 
@@ -70,8 +92,8 @@ export default function WhistleblowerForm() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    encryptedMessage: encryptedMessage
-                    // Future: encryptedAttachments
+                    encryptedMessage: encryptedMessage,
+                    attachments: processedFiles
                 })
             })
 

@@ -9,13 +9,26 @@ export async function POST(request: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     try {
-        const { encryptedMessage, encryptedAttachments } = await request.json();
+        const { encryptedMessage, attachments } = await request.json();
 
         if (!encryptedMessage) {
             return NextResponse.json({ error: 'No encrypted message provided' }, { status: 400 });
         }
 
         const adminEmail = process.env.ADMIN_EMAIL || 'hedayatsattar@gmail.com';
+
+        // Prepare attachments for Resend
+        let emailAttachments: any[] = [];
+        if (attachments && Array.isArray(attachments)) {
+            emailAttachments = attachments.map((att: any) => {
+                // Remove data URL prefix if present (e.g. "data:image/png;base64,")
+                const base64Content = att.content.split(';base64,').pop();
+                return {
+                    filename: att.filename,
+                    content: Buffer.from(base64Content, 'base64')
+                };
+            });
+        }
 
         const emailContent = await render(
             <EmailTemplate
@@ -34,7 +47,7 @@ export async function POST(request: Request) {
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#1E3A8A' }}>
                             <span>📎 پیوست‌ها:</span>
-                            <strong>{encryptedAttachments ? encryptedAttachments.length : 0} فایل</strong>
+                            <strong>{emailAttachments.length} فایل</strong>
                         </div>
                     </div>
                 }
@@ -45,7 +58,8 @@ export async function POST(request: Request) {
             from: 'Lion & Sun Secure <onboarding@resend.dev>',
             to: adminEmail,
             subject: 'New Encrypted Message',
-            html: emailContent
+            html: emailContent,
+            attachments: emailAttachments
         });
 
         if (error) {
