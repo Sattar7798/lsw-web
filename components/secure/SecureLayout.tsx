@@ -50,17 +50,6 @@ export default function SecureLayout({ children }: SecureLayoutProps) {
                             {secureMode ? 'SECURE_CHANNEL_ESTABLISHED // ENCRYPTED_V3' : 'کانال ارتباطی امن'}
                         </span>
                     </div>
-
-                    <button
-                        onClick={() => setSecureMode(!secureMode)}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${secureMode
-                                ? 'bg-green-900/20 border-green-500 text-green-500 hover:bg-green-500/10'
-                                : 'bg-white/5 border-white/10 text-gray-300 hover:border-matte-gold/50 hover:text-white'
-                            }`}
-                    >
-                        <div className={`w-2 h-2 rounded-full ${secureMode ? 'bg-green-500 animate-pulse' : 'bg-gray-500'}`}></div>
-                        {secureMode ? 'حالت امن فعال' : 'فعال‌سازی حالت امن'}
-                    </button>
                 </div>
             </div>
 
