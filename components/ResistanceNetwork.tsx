@@ -59,7 +59,7 @@ function Flag() {
     const mesh = useRef<THREE.Mesh>(null)
     // Load logo - ensure path is correct. 
     // If it fails, it might be due to missing Suspense boundary in parent.
-    const texture = useTexture('/lion and sun flag.jpg')
+    const texture = useTexture('/lion-and-sun-flag.jpg')
 
     const uniforms = useMemo(() => ({
         uTime: { value: 0 },
