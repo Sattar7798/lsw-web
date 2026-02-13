@@ -1,10 +1,23 @@
 import { NextResponse } from 'next/server';
+import { Redis } from '@upstash/redis';
 
 export const runtime = 'edge';
 
-// NOTE: In Cloudflare or Serverless environments, this in-memory store is ephemeral (resets on deployment/cold start).
-// For permanent production storage, you must use Cloudflare KV, D1, or an external database (Supabase/Firebase).
-const votesStore: Record<string, number> = {
+// Initialize Redis client
+function getRedisClient() {
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+    if (!url || !token) {
+        console.log('Upstash credentials not found for voting');
+        return null;
+    }
+
+    return new Redis({ url, token });
+}
+
+// Fallback in-memory storage for local dev
+const localVotesStore: Record<string, number> = {
     'opt-monarchy-const': 0,
     'opt-monarchy-hered': 0,
     'opt-monarchy-elect': 0,
@@ -13,8 +26,7 @@ const votesStore: Record<string, number> = {
     'opt-justice': 0,
     'opt-prisoners': 0
 };
-
-const ipStore: Record<string, string[]> = {}; // pollId -> [hashedIPs]
+const localIpStore: Record<string, string[]> = {};
 
 async function hashIP(ip: string) {
     const msgBuffer = new TextEncoder().encode(ip);
@@ -26,43 +38,61 @@ async function hashIP(ip: string) {
 export async function POST(request: Request) {
     try {
         const { pollId, optionId } = await request.json();
+        const redis = getRedisClient();
 
-        // precise IP extraction for Cloudflare/Next.js
+        // Get IP
         const ip = request.headers.get('cf-connecting-ip') ||
             request.headers.get('x-forwarded-for') ||
             'unknown';
 
-        if (ip === 'unknown') {
-            // For strict security, block unknown IPs. For dev, we might allow.
-            // return NextResponse.json({ error: 'Cannot verify identity' }, { status: 403 });
-        }
-
         const hashedIP = await hashIP(ip);
 
-        // Initialize poll storage if needed
-        if (!ipStore[pollId]) {
-            ipStore[pollId] = [];
-        }
+        if (redis) {
+            // === REDIS PATH ===
+            // Check if IP has already voted
+            const votersKey = `poll:${pollId}:voters`;
+            const voters = (await redis.smembers(votersKey) as string[]) || [];
 
-        // 1. Check if IP has already voted
-        if (ipStore[pollId].includes(hashedIP)) {
-            return NextResponse.json({ error: 'شما قبلاً در این نظرسنجی شرکت کرده‌اید.' }, { status: 429 });
-        }
+            if (voters.includes(hashedIP)) {
+                return NextResponse.json({ error: 'شما قبلاً در این نظرسنجی شرکت کرده‌اید.' }, { status: 429 });
+            }
 
-        // 2. Register Vote
-        ipStore[pollId].push(hashedIP);
+            // Add IP to voters set
+            await redis.sadd(votersKey, hashedIP);
 
-        if (typeof votesStore[optionId] === 'number') {
-            votesStore[optionId]++;
+            // Increment vote count
+            const voteKey = `vote:${optionId}`;
+            const newCount = await redis.incr(voteKey);
+
+            return NextResponse.json({
+                success: true,
+                votes: newCount,
+                message: 'رأی شما با موفقیت ثبت شد.'
+            });
         } else {
-            return NextResponse.json({ error: 'Invalid option' }, { status: 400 });
-        }
+            // === FALLBACK: LOCAL MEMORY ===
+            if (!localIpStore[pollId]) {
+                localIpStore[pollId] = [];
+            }
 
-        return NextResponse.json({
-            success: true,
-            votes: votesStore[optionId],
-            message: 'رأی شما با موفقیت ثبت شد.'
-        });
+            if (localIpStore[pollId].includes(hashedIP)) {
+                return NextResponse.json({ error: 'شما قبلاً در این نظرسنجی شرکت کرده‌اید.' }, { status: 429 });
+            }
+
+            localIpStore[pollId].push(hashedIP);
+
+            if (typeof localVotesStore[optionId] === 'number') {
+                localVotesStore[optionId]++;
+            } else {
+                return NextResponse.json({ error: 'Invalid option' }, { status: 400 });
+            }
+
+            return NextResponse.json({
+                success: true,
+                votes: localVotesStore[optionId],
+                message: 'رأی شما با موفقیت ثبت شد.'
+            });
+        }
 
     } catch (error) {
         console.error('Vote Error:', error);
@@ -71,6 +101,36 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-    // Return current vote counts
-    return NextResponse.json(votesStore);
+    try {
+        const redis = getRedisClient();
+
+        if (redis) {
+            // === REDIS PATH ===
+            const optionIds = [
+                'opt-monarchy-const',
+                'opt-monarchy-hered',
+                'opt-monarchy-elect',
+                'opt-republic',
+                'opt-economy',
+                'opt-justice',
+                'opt-prisoners'
+            ];
+
+            const votes: Record<string, number> = {};
+
+            // Fetch all vote counts from Redis
+            for (const optionId of optionIds) {
+                const count = await redis.get<number>(`vote:${optionId}`);
+                votes[optionId] = count || 0;
+            }
+
+            return NextResponse.json(votes);
+        } else {
+            // === FALLBACK: LOCAL MEMORY ===
+            return NextResponse.json(localVotesStore);
+        }
+    } catch (error) {
+        console.error('Get votes error:', error);
+        return NextResponse.json(localVotesStore);
+    }
 }
