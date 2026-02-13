@@ -40,6 +40,8 @@ export async function POST(request: Request) {
         const { pollId, optionId } = await request.json();
         const redis = getRedisClient();
 
+        console.log('🗳️ Vote POST:', { pollId, optionId, hasRedis: !!redis });
+
         // Get IP
         const ip = request.headers.get('cf-connecting-ip') ||
             request.headers.get('x-forwarded-for') ||
@@ -49,6 +51,7 @@ export async function POST(request: Request) {
 
         if (redis) {
             // === REDIS PATH ===
+            console.log('🗳️ Using Redis for voting');
             // Check if IP has already voted
             const votersKey = `poll:${pollId}:voters`;
             const voters = (await redis.smembers(votersKey) as string[]) || [];
@@ -63,6 +66,7 @@ export async function POST(request: Request) {
             // Increment vote count
             const voteKey = `vote:${optionId}`;
             const newCount = await redis.incr(voteKey);
+            console.log('✅ Vote registered in Redis:', { optionId, newCount });
 
             return NextResponse.json({
                 success: true,
@@ -71,6 +75,7 @@ export async function POST(request: Request) {
             });
         } else {
             // === FALLBACK: LOCAL MEMORY ===
+            console.log('⚠️ Using local memory for voting (not persistent)');
             if (!localIpStore[pollId]) {
                 localIpStore[pollId] = [];
             }
@@ -95,7 +100,7 @@ export async function POST(request: Request) {
         }
 
     } catch (error) {
-        console.error('Vote Error:', error);
+        console.error('❌ Vote Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
@@ -103,6 +108,7 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
     try {
         const redis = getRedisClient();
+        console.log('🗳️ Vote GET: Fetching votes, hasRedis:', !!redis);
 
         if (redis) {
             // === REDIS PATH ===
@@ -124,13 +130,15 @@ export async function GET(request: Request) {
                 votes[optionId] = count || 0;
             }
 
+            console.log('✅ Votes from Redis:', votes);
             return NextResponse.json(votes);
         } else {
             // === FALLBACK: LOCAL MEMORY ===
+            console.log('⚠️ Votes from local memory:', localVotesStore);
             return NextResponse.json(localVotesStore);
         }
     } catch (error) {
-        console.error('Get votes error:', error);
+        console.error('❌ Get votes error:', error);
         return NextResponse.json(localVotesStore);
     }
 }

@@ -14,8 +14,10 @@ export default function PollCard({ poll }: { poll: Poll }) {
     useEffect(() => {
         const fetchVotes = async () => {
             try {
+                console.log('🗳️ PollCard: Fetching votes for poll:', poll.id);
                 const res = await fetch('/api/vote');
                 const data = await res.json();
+                console.log('🗳️ PollCard: Received vote data:', data);
 
                 // Update results with real data from server
                 if (data) {
@@ -28,9 +30,10 @@ export default function PollCard({ poll }: { poll: Poll }) {
                     // Recalculate total
                     const newTotal = newResults.reduce((acc, curr) => acc + curr.votes, 0);
                     setTotal(newTotal);
+                    console.log('✅ PollCard: Updated results:', { newResults, newTotal });
                 }
             } catch (error) {
-                console.error('Failed to fetch votes', error);
+                console.error('❌ Failed to fetch votes', error);
             }
         };
 
