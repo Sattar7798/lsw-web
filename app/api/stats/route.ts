@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export const runtime = 'edge';
 
@@ -7,10 +8,15 @@ let localCounter = 0;
 
 export async function GET(request: Request) {
     try {
-        // Access Cloudflare KV binding from the runtime
-        // @ts-ignore - Cloudflare binding
-        const env = request.cf?.env || (globalThis as any).STATS_KV;
-        const KV = env?.STATS_KV;
+        // Try to get Cloudflare context (production)
+        let KV = null;
+        try {
+            const context = getRequestContext();
+            KV = context.env.STATS_KV;
+        } catch (e) {
+            // Not in Cloudflare environment, use fallback
+            console.log('Not in Cloudflare environment, using local counter');
+        }
 
         // Try to get from KV first (production)
         if (KV && typeof KV.get === 'function') {
@@ -30,10 +36,15 @@ export async function POST(request: Request) {
     try {
         let newCount = 1;
 
-        // Access Cloudflare KV binding from the runtime
-        // @ts-ignore - Cloudflare binding
-        const env = request.cf?.env || (globalThis as any).STATS_KV;
-        const KV = env?.STATS_KV;
+        // Try to get Cloudflare context (production)
+        let KV = null;
+        try {
+            const context = getRequestContext();
+            KV = context.env.STATS_KV;
+        } catch (e) {
+            // Not in Cloudflare environment, use fallback
+            console.log('Not in Cloudflare environment, using local counter');
+        }
 
         // Try to use KV first (production)
         if (KV && typeof KV.get === 'function' && typeof KV.put === 'function') {
