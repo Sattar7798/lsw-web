@@ -1,19 +1,35 @@
 import { NextResponse } from 'next/server';
+import { Redis } from '@upstash/redis';
 
 export const runtime = 'edge';
 
-// Fallback counter for local/non-KV environments
+// Fallback counter for local dev without Redis configured
 let localCounter = 0;
+
+// Initialize Redis client if environment variables are set
+function getRedisClient() {
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+    if (!url || !token) {
+        console.log('Upstash credentials not found, using local counter');
+        return null;
+    }
+
+    return new Redis({
+        url,
+        token,
+    });
+}
 
 export async function GET(request: Request) {
     try {
-        // In Cloudflare Pages, bindings are available via platform context
-        // @ts-ignore - Cloudflare-specific env binding
-        const env: Env | undefined = (request as any).env || (globalThis as any).env;
+        const redis = getRedisClient();
 
-        if (env?.STATS_KV) {
-            const count = await env.STATS_KV.get('total_resistance_ids');
-            return NextResponse.json({ count: parseInt(count || '0', 10) });
+        if (redis) {
+            // Get count from Redis
+            const count = await redis.get<number>('total_resistance_ids');
+            return NextResponse.json({ count: count || 0 });
         }
 
         // Fallback to local counter
@@ -26,16 +42,12 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     try {
-        // In Cloudflare Pages, bindings are available via platform context
-        // @ts-ignore - Cloudflare-specific env binding  
-        const env: Env | undefined = (request as any).env || (globalThis as any).env;
-
+        const redis = getRedisClient();
         let newCount = 1;
 
-        if (env?.STATS_KV) {
-            const current = await env.STATS_KV.get('total_resistance_ids');
-            newCount = parseInt(current || '0', 10) + 1;
-            await env.STATS_KV.put('total_resistance_ids', newCount.toString());
+        if (redis) {
+            // Increment in Redis atomically
+            newCount = await redis.incr('total_resistance_ids');
         } else {
             // Fallback to local counter
             localCounter++;
@@ -48,7 +60,7 @@ export async function POST(request: Request) {
         });
     } catch (error) {
         console.error('Stats POST error:', error);
-        // Even on error, increment local counter
+        // Fallback to local counter on error
         localCounter++;
         return NextResponse.json({
             success: true,

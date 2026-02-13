@@ -1,0 +1,5 @@
+# Example environment variables for local development
+# Copy this to .dev.vars and fill in your values
+
+# For Cloudflare KV local testing (optional)
+# STATS_KV=your-kv-namespace-id
