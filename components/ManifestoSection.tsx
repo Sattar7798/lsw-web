@@ -60,9 +60,9 @@ export default function ManifestoSection() {
                         className="text-xl md:text-2xl leading-loose text-marble-white/80 font-light mb-12"
                     >
                         ما در نقطه‌ای از تاریخ ایستاده‌ایم که سکوت جایز نیست.
-                        اپوزیسیون شیر و خورشید، نه یک حزب، بلکه یک
-                        <span className="font-bold text-matte-gold mx-2">حرکت ملی</span>
-                        برای بازپس‌گیری هویت، عزت و آزادی ایران است.
+                        اپوزیسیون شیر و خورشید، نه یک حزب، بلکه یک{' '}
+                        <span className="font-bold text-matte-gold">حرکت ملی</span>
+                        {' '}برای بازپس‌گیری هویت، عزت و آزادی ایران است.
                         ما متعهد به ایجاد ساختاری دموکراتیک، سکولار و مبتنی بر حقوق بشر هستیم.
                     </motion.p>
 

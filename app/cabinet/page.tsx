@@ -74,18 +74,48 @@ export default function CabinetPage() {
                     ))}
                 </div>
 
-                {/* Structure Visualization Placeholder */}
-                <div className="mt-32 text-center opacity-40 border-t border-[#3e342a] pt-12">
-                    <h3 className="text-2xl font-nastaliq text-[#8a8175] mb-4">نمودار سازمانی دولت انتقالی</h3>
-                    <div className="w-full h-64 border-2 border-dashed border-[#3e342a] rounded-lg flex items-center justify-center text-[#3e342a]">
-                        [ نمودار در حال تکمیل است ]
-                    </div>
+                {/* Party Video Section */}
+                <div className="mt-32 mb-20 relative z-10 px-4">
+                    <div className="w-full h-px bg-gradient-to-r from-transparent via-[#c5a059]/40 to-transparent mb-12"></div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="max-w-4xl mx-auto"
+                    >
+                        <div className="relative group">
+                            {/* Glow Effect */}
+                            <div className="absolute -inset-2 bg-gradient-to-r from-[#c5a059] via-[#8a8175] to-[#c5a059] opacity-10 blur-xl group-hover:opacity-30 transition-opacity duration-1000"></div>
+
+                            <div className="relative rounded-2xl overflow-hidden border border-[#c5a059]/20 bg-black/90 shadow-2xl">
+                                {/* Decorative Corners */}
+                                <div className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 border-[#c5a059]/30 rounded-tl-xl"></div>
+                                <div className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 border-[#c5a059]/30 rounded-tr-xl"></div>
+                                <div className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 border-[#c5a059]/30 rounded-bl-xl"></div>
+                                <div className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 border-[#c5a059]/30 rounded-br-xl"></div>
+
+                                <video
+                                    src="/hezb.MOV"
+                                    controls
+                                    className="w-full h-auto max-h-[60vh] object-contain mx-auto"
+                                    style={{ boxShadow: 'inset 0 0 50px rgba(0,0,0,0.8)' }}
+                                >
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+
+                            <div className="text-center mt-8">
+                                <h3 className="text-[#c5a059] font-nastaliq text-3xl drop-shadow-md opacity-80">
+                                    ندای حزب ملی
+                                </h3>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
 
                 {/* Footer Decor */}
-                <div className="mt-40 text-center opacity-20">
-                    <span className="text-6xl grayscale">🦁</span>
-                </div>
             </div>
         </main>
     )

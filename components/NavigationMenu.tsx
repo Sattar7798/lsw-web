@@ -35,17 +35,17 @@ export default function NavigationMenu() {
         participation: {
             title: 'مشارکت',
             items: [
-                { name: '🗳️ صندوق رأی', href: '/voting' },
-                { name: '🆔 کارت شهروندی (پارس)', href: '/citizenship' },
-                { name: '🚩 شبکه شیر و خورشید', href: '/iran-map' },
+                { name: 'صندوق رأی', href: '/voting' },
+                { name: 'کارت شهروندی (پارس)', href: '/citizenship' },
+                { name: 'شبکه شیر و خورشید', href: '/iran-map' },
             ]
         },
         movement: {
             title: 'درباره جنبش',
             items: [
-                { name: '👑 رهبر', href: '/leader' },
-                { name: '👁️ چشم‌انداز', href: '/vision' },
-                { name: '⏳ تایم‌لاین', href: '/timeline' },
+                { name: 'رهبر', href: '/leader' },
+                { name: 'چشم‌انداز', href: '/vision' },
+                { name: 'تایم‌لاین', href: '/timeline' },
             ]
         }
     }
