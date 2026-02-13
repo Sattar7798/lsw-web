@@ -97,19 +97,24 @@ export default function ResistanceNetwork() {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const res = await fetch('/api/stats')
-                const data = await res.json()
+                console.log('🗺️ Iran-map: Fetching stats...');
+                // Add cache-busting to ensure fresh data
+                const res = await fetch(`/api/stats?t=${Date.now()}`, {
+                    cache: 'no-store'
+                });
+                const data = await res.json();
+                console.log('🗺️ Iran-map: Stats received:', data);
                 if (data.count !== undefined) {
-                    setActiveNodes(data.count)
+                    setActiveNodes(data.count);
                 }
             } catch (e) {
-                console.error('Failed to fetch stats', e)
+                console.error('❌ Failed to fetch stats', e);
             }
         }
 
-        fetchStats()
-        const interval = setInterval(fetchStats, 5000)
-        return () => clearInterval(interval)
+        fetchStats();
+        const interval = setInterval(fetchStats, 5000);
+        return () => clearInterval(interval);
     }, [])
 
     return (
