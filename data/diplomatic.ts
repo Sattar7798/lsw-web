@@ -19,7 +19,7 @@ export const diplomaticData: DiplomaticDocument[] = [
 ];
 
 export const embassyContacts = [
-    { city: 'London', email: 'london@lionandsun.org', pbo: 'PO Box 1979' },
-    { city: 'Paris', email: 'paris@lionandsun.org', pbo: 'BP 2535' },
-    { city: 'Washington DC', email: 'dc@lionandsun.org', pbo: 'Suite 2026' },
+    { city: 'London', country: 'UK', email: 'london@lionandsun.org', pbo: 'PO Box 1979' },
+    { city: 'Paris', country: 'France', email: 'paris@lionandsun.org', pbo: 'BP 2535' },
+    { city: 'Washington DC', country: 'USA', email: 'dc@lionandsun.org', pbo: 'Suite 2026' },
 ];
