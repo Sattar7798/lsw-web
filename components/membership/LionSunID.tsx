@@ -43,15 +43,15 @@ export default function LionSunID({ name, province, idNumber, joinDate, skills }
 
                 {/* Header */}
                 <div className="flex justify-between items-start" dir="rtl">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-start gap-3">
                         {/* Logo */}
-                        <div className="relative w-12 h-12 rounded-full border border-[#d4af37]/50 shadow-[0_0_15px_rgba(212,175,55,0.3)] bg-black/50 overflow-hidden">
+                        <div className="relative w-24 h-24 -mt-6 -mr-6">
                             <div
-                                className="w-full h-full bg-cover bg-center"
+                                className="w-full h-full bg-contain bg-center bg-no-repeat drop-shadow-md"
                                 style={{ backgroundImage: 'url(/logo.jpg)' }}
                             />
                         </div>
-                        <div className="text-right">
+                        <div className="text-right mt-2">
                             <h3 className="text-[#fcf6ba] font-bold text-base tracking-wide font-sans leading-none mb-1 shadow-black drop-shadow-md">
                                 شیر و خورشید
                             </h3>
@@ -116,7 +116,7 @@ export default function LionSunID({ name, province, idNumber, joinDate, skills }
 
             {/* Dynamic Glare on Hover */}
             <motion.div
-                className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent z-30 pointer-events-none"
+                className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent z-30 pointer-events-none glare-effect"
                 initial={{ x: '-100%' }}
                 animate={{ x: '200%' }}
                 transition={{ repeat: Infinity, duration: 3, ease: 'linear', repeatDelay: 1 }}

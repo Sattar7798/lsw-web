@@ -3,6 +3,7 @@
 import { pollsData } from '@/data/polls'
 import PollCard from '@/components/voting/PollCard'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function VotingPage() {
     return (
@@ -15,8 +16,8 @@ export default function VotingPage() {
 
             {/* Header */}
             <header className="relative z-10 pt-16 pb-12 text-center">
-                <div className="inline-flex items-center justify-center p-4 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 mb-6 shadow-[0_0_20px_rgba(212,175,55,0.1)]">
-                    <span className="text-4xl">🗳️</span>
+                <div className="relative w-32 h-32 mx-auto mb-6 drop-shadow-2xl opacity-90 hover:opacity-100 transition-opacity">
+                    <Image src="/logo.jpg" alt="صندوق رأی" fill className="object-contain" />
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold font-nastaliq text-[#d4af37] mb-4 drop-shadow-md">
                     صندوق رأی دیجیتال

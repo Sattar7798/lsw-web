@@ -15,12 +15,12 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({ content, subject }
             </div>
 
             {/* Logo Image */}
-            <div style={{ width: '50px', height: '50px', borderRadius: '50%', overflow: 'hidden', border: '2px solid #FCD34D' }}>
+            <div style={{ width: '60px', height: '60px', borderRadius: '8px', overflow: 'hidden', border: '2px solid #FCD34D' }}>
                 {/* Using the production URL for Cloudflare Pages. If the domain is custom, this should be updated. */}
                 <img
                     src="https://lsw-web.pages.dev/logo.jpg"
                     alt="Lion & Sun Logo"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                 />
             </div>
         </div>

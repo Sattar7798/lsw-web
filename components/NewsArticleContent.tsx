@@ -60,12 +60,12 @@ export default function NewsArticleContent({ news, relatedNews }: Props) {
                         </h1>
 
                         <div className="flex items-center gap-5 border-t border-white/20 pt-7">
-                            <div className="relative w-16 h-16 rounded-full p-[2px] bg-gradient-to-br from-matte-gold via-yellow-500 to-yellow-600 shadow-lg shadow-matte-gold/40">
-                                <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
+                            <div className="relative w-20 h-20 rounded-xl p-[2px] bg-gradient-to-br from-matte-gold via-yellow-500 to-yellow-600 shadow-lg shadow-matte-gold/40">
+                                <div className="w-full h-full rounded-xl bg-white flex items-center justify-center overflow-hidden">
                                     <img
                                         src="/logo.jpg"
                                         alt="Lion and Sun Logo"
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-contain"
                                     />
                                 </div>
                             </div>

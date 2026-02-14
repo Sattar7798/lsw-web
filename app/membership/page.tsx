@@ -179,10 +179,14 @@ export default function MembershipPage() {
                                         try {
                                             const html2canvas = (await import('html2canvas')).default
                                             const canvas = await html2canvas(cardElement, {
-                                                scale: 2, // Higher resolution
-                                                backgroundColor: null, // Transparent background if needed, or stick to CSS
+                                                scale: 4, // Higher resolution
+                                                backgroundColor: '#0f0f0f', // Explicit background color
                                                 logging: false,
-                                                useCORS: true // For images
+                                                useCORS: true, // For images
+                                                onclone: (clonedDoc) => {
+                                                    const glare = clonedDoc.querySelector('.glare-effect') as HTMLElement
+                                                    if (glare) glare.style.display = 'none'
+                                                }
                                             } as any)
                                             const link = document.createElement('a')
                                             link.download = `LionSun-ID-${idData.idNumber}.png`

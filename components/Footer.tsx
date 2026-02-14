@@ -46,15 +46,15 @@ export default function Footer() {
                     <div className="lg:col-span-4 space-y-6">
                         <Link href="/" className="inline-block group">
                             <div className="flex items-center gap-4">
-                                <div className="relative w-16 h-16 rounded-full border border-matte-gold/30 p-2 group-hover:border-matte-gold transition-colors">
+                                <div className="relative w-28 h-28 transition-all duration-300 hover:scale-105">
                                     <Image
                                         src="/logo.jpg"
                                         alt="شیر و خورشید"
                                         fill
-                                        className="object-cover rounded-full"
+                                        className="object-contain"
                                     />
                                 </div>
-                                <div className="flex flex-col">
+                                <div className="flex flex-col justify-center h-28">
                                     <h3 className="text-2xl font-nastaliq text-matte-gold">اپوزیسیون شیر و خورشید</h3>
                                     <span className="text-sm text-gray-400">فرزندان پرچم</span>
                                 </div>
@@ -135,7 +135,9 @@ export default function Footer() {
                                 { name: 'اسناد رسمی', href: '/documents' },
                                 { name: 'بیانیه‌ها', href: '/news' },
                                 { name: 'عضویت', href: '/membership' },
-                                { name: 'حریم خصوصی', href: '/documents' }
+                                { name: 'حریم خصوصی', href: '/legal/privacy' },
+                                { name: 'قوانین و شرایط', href: '/legal/terms' },
+                                { name: 'کوکی‌ها', href: '/legal/cookies' }
                             ].map((item, i) => (
                                 <li key={i}>
                                     <Link href={item.href} className="text-gray-400 hover:text-matte-gold transition-colors block">
@@ -188,13 +190,14 @@ export default function Footer() {
                         © {currentYear} اپوزیسیون شیر و خورشید. تمامی حقوق محفوظ است.
                     </p>
                     <div className="flex items-center gap-6">
-                        <span className="text-gray-600 text-sm">طراحی شده برای آزادی</span>
-                        <div className="w-8 h-8 opacity-20">
-                            <Image src="/logo.jpg" alt="Logo" width={32} height={32} />
+                        <span className="text-gray-500 text-base font-medium">طراحی شده برای آزادی</span>
+                        <div className="relative w-16 h-16 opacity-80 transition-all duration-300 hover:scale-110 hover:opacity-100">
+                            <Image src="/logo.jpg" alt="Logo" fill className="object-contain" />
                         </div>
                     </div>
                 </div>
             </div>
-        </footer>
+
+        </footer >
     )
 }

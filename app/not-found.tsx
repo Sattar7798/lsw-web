@@ -29,13 +29,13 @@ export default function NotFound() {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.8 }}
-                    className="relative w-48 h-48 mx-auto mb-8 opacity-50"
+                    className="relative w-56 h-56 mx-auto mb-8 opacity-50"
                 >
                     <Image
                         src="/logo.jpg"
                         alt="Lion and Sun"
                         fill
-                        className="object-cover rounded-full grayscale hover:grayscale-0 transition-all duration-700"
+                        className="object-contain grayscale hover:grayscale-0 transition-all duration-700"
                     />
                 </motion.div>
 

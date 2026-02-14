@@ -154,8 +154,8 @@ export default function ContactPage() {
                                         rel="noopener noreferrer"
                                         className="text-center p-4 bg-charcoal/30 rounded-lg hover:bg-charcoal/50 transition-all hover:scale-105"
                                     >
-                                        <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden bg-marble-white/10 p-1">
-                                            <Image src="/telegramlogo.png" alt="Telegram" width={64} height={64} className="w-full h-full object-cover rounded-full" />
+                                        <div className="w-16 h-16 mx-auto mb-3 overflow-hidden">
+                                            <Image src="/telegramlogo.png" alt="Telegram" width={64} height={64} className="w-full h-full object-contain" />
                                         </div>
                                         <p className="text-matte-gold font-semibold mb-1">تلگرام</p>
                                         <p className="text-marble-white/80 text-sm">
@@ -168,8 +168,8 @@ export default function ContactPage() {
                                         rel="noopener noreferrer"
                                         className="text-center p-4 bg-charcoal/30 rounded-lg hover:bg-charcoal/50 transition-all hover:scale-105"
                                     >
-                                        <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden bg-marble-white/10 p-1">
-                                            <Image src="/xlogo.jpg" alt="X/Twitter" width={64} height={64} className="w-full h-full object-cover rounded-full" />
+                                        <div className="w-16 h-16 mx-auto mb-3 overflow-hidden">
+                                            <Image src="/xlogo.jpg" alt="X/Twitter" width={64} height={64} className="w-full h-full object-contain" />
                                         </div>
                                         <p className="text-matte-gold font-semibold mb-1">توییتر</p>
                                         <p className="text-marble-white/80 text-sm">
@@ -182,8 +182,8 @@ export default function ContactPage() {
                                         rel="noopener noreferrer"
                                         className="text-center p-4 bg-charcoal/30 rounded-lg hover:bg-charcoal/50 transition-all hover:scale-105"
                                     >
-                                        <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden bg-marble-white/10 p-1">
-                                            <Image src="/instalogo.jpg" alt="Instagram" width={64} height={64} className="w-full h-full object-cover rounded-full" />
+                                        <div className="w-16 h-16 mx-auto mb-3 overflow-hidden">
+                                            <Image src="/instalogo.jpg" alt="Instagram" width={64} height={64} className="w-full h-full object-contain" />
                                         </div>
                                         <p className="text-matte-gold font-semibold mb-1">اینستاگرام</p>
                                         <p className="text-marble-white/80 text-sm">

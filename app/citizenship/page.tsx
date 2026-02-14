@@ -81,9 +81,9 @@ export default function CitizenshipPage() {
                         exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
                         className="max-w-2xl w-full text-center space-y-8 relative z-10"
                     >
-                        <div className="w-24 h-24 mx-auto bg-gradient-to-b from-[#d4af37] to-[#8a6e2f] rounded-full p-[1px] shadow-[0_0_50px_rgba(212,175,55,0.3)]">
-                            <div className="w-full h-full bg-black rounded-full flex items-center justify-center overflow-hidden">
-                                <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover opacity-80" />
+                        <div className="w-32 h-32 mx-auto bg-gradient-to-b from-[#d4af37] to-[#8a6e2f] bg-opacity-20 rounded-xl p-[1px] shadow-[0_0_50px_rgba(212,175,55,0.3)]">
+                            <div className="w-full h-full bg-black rounded-xl flex items-center justify-center overflow-hidden">
+                                <img src="/logo.jpg" alt="Logo" className="w-full h-full object-contain opacity-80" />
                             </div>
                         </div>
 

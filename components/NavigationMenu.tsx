@@ -58,26 +58,33 @@ export default function NavigationMenu() {
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isSecurePage ? 'hidden' : ''
                 } ${scrolled
                     ? 'bg-[#1c1917]/90 backdrop-blur-xl border-b border-[#d4af37]/30 shadow-2xl py-2'
-                    : 'bg-transparent py-4'
+                    : 'bg-transparent py-1'
                 }`}
             onMouseLeave={() => setActiveDropdown(null)}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="w-full mx-auto px-4 sm:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo Section */}
                     {/* Safe Mode Trigger: Click 3 times to activate */}
-                    <div onClick={(e) => { e.preventDefault(); incrementClick(); }} className="cursor-pointer flex items-center gap-4 group relative z-50">
-                        <div className="relative">
-                            <div className="absolute -inset-1 bg-gradient-to-r from-[#d4af37] to-yellow-600 rounded-full opacity-0 group-hover:opacity-75 blur transition duration-500"></div>
-                            <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#d4af37]/50 group-hover:ring-[#d4af37] transition-all duration-500 shadow-lg shadow-[#d4af37]/20">
+                    <div onClick={(e) => { e.preventDefault(); incrementClick(); }} className="cursor-pointer flex items-center gap-2 group relative z-50">
+                        <div className="relative flex items-center justify-center group">
+                            <div className="relative w-28 h-28 transition-all duration-500">
+                                {/* The Logo Image */}
                                 <div
-                                    className="w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                                    className="relative z-10 w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out"
                                     style={{
                                         backgroundImage: 'url(/logo.jpg)',
-                                        backgroundSize: 'cover',
+                                        backgroundSize: 'contain',
                                         backgroundPosition: 'center',
+                                        backgroundRepeat: 'no-repeat',
                                     }}
-                                />
+                                >
+                                    {/* The Sun Glow Overlay - Extremely precise and professional */}
+                                    <div
+                                        className="absolute inset-0 bg-[radial-gradient(circle_at_50%_43%,rgba(255,255,255,0.9)_0%,rgba(255,223,0,0.7)_15%,rgba(255,215,0,0.4)_25%,transparent_40%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out blur-sm"
+                                        style={{ mixBlendMode: 'plus-lighter', transform: 'translateZ(0)' }}
+                                    ></div>
+                                </div>
                             </div>
                         </div>
                         <div className="flex flex-col">

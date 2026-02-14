@@ -3,51 +3,82 @@ import React from 'react'
 
 export default function Letterhead({ children }: { children: React.ReactNode }) {
     return (
-        <div className="bg-white text-black p-10 md:p-16 shadow-2xl relative overflow-hidden min-h-[800px] border-8 border-double border-[#d4af37]/40 ring-1 ring-gray-100 mx-auto max-w-4xl">
-            {/* Watermark */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
-                <img src="/logo.jpg" alt="Watermark" className="w-[500px] grayscale" />
-            </div>
+        <div className="relative group perspective-1000">
+            {/* Stacking Effect (Pages underneath) */}
+            <div className="absolute inset-0 bg-white/90 translate-y-2 translate-x-2 rounded-sm shadow-md z-0"></div>
+            <div className="absolute inset-0 bg-white/95 translate-y-1 translate-x-1 rounded-sm shadow-md z-0"></div>
 
-            {/* Header */}
-            <div className="flex justify-between items-center border-b-2 border-[#c5a059] pb-8 mb-12 relative z-10 font-serif">
-                <div className="text-left w-1/3">
-                    <h2 className="text-lg font-bold text-gray-900 uppercase tracking-[0.2em]">
-                        Government in Exile
-                    </h2>
-                    <p className="text-xs text-[#c5a059] uppercase tracking-widest mt-2 font-semibold">
-                        State of Iran
-                    </p>
+            {/* Main Paper */}
+            <div className="relative z-10 bg-[#fdfbf7] text-black p-12 md:p-16 shadow-2xl overflow-hidden min-h-[800px] border border-gray-200 mx-auto max-w-4xl rounded-sm transition-transform duration-500 ease-out hover:-translate-y-1 hover:shadow-3xl">
+
+                {/* Paper Texture Overlay */}
+                <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none select-none mix-blend-multiply"></div>
+
+                {/* Gold Foil Border Frame */}
+                <div className="absolute inset-4 border-2 border-[#c5a059]/20 pointer-events-none"></div>
+                <div className="absolute inset-5 border border-[#c5a059]/10 pointer-events-none"></div>
+
+                {/* Watermark */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none select-none">
+                    <img src="/logo.jpg" alt="Watermark" className="w-[500px] grayscale contrast-150" />
                 </div>
 
-                <div className="flex flex-col items-center w-1/3">
-                    <div className="w-24 h-24 rounded-full border-4 border-[#c5a059] p-1 shadow-lg mb-2 flex items-center justify-center overflow-hidden">
-                        <img src="/logo.jpg" alt="Official Seal" className="w-full h-full object-cover" />
+                {/* Header */}
+                <header className="relative z-20 flex flex-col items-center mb-16 border-b border-[#c5a059] pb-8">
+                    <div className="w-24 h-24 mb-6 relative">
+                        <img src="/logo.jpg" alt="Official Seal" className="w-full h-full object-contain drop-shadow-md" />
                     </div>
-                </div>
 
-                <div className="text-right w-1/3">
-                    <h2 className="text-2xl font-bold text-gray-900 font-nastaliq mb-1">
-                        حزب ملی ایران
-                    </h2>
-                    <p className="text-sm text-[#c5a059] font-nastaliq">
-                        شورای عالی گذار
-                    </p>
-                </div>
-            </div>
+                    <div className="text-center space-y-2">
+                        <h2 className="text-2xl font-bold font-serif tracking-widest text-gray-900 uppercase">
+                            Transition Council of Iran
+                        </h2>
+                        <h3 className="text-sm text-[#c5a059] font-bold tracking-[0.3em] uppercase">
+                            Official Communiqué
+                        </h3>
+                    </div>
 
-            {/* Content Body */}
-            <div className="relative z-10 font-serif leading-loose text-gray-800 text-lg text-justify px-4 md:px-8 tracking-wide">
-                {children}
-            </div>
+                    <div className="absolute right-0 top-0 hidden md:block text-right">
+                        <div className="text-[10px] text-gray-400 font-mono uppercase tracking-widest leading-loose">
+                            Ref: IR-DIP-2026-X<br />
+                            Class: UNCLASSIFIED<br />
+                            Date: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                        </div>
+                    </div>
+                </header>
 
-            {/* Footer */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 flex justify-center items-center">
-                <div className="border-t border-[#c5a059]/30 w-full pt-4 flex justify-between text-[10px] text-gray-400 uppercase tracking-widest font-mono">
-                    <span>Office of International Affairs</span>
-                    <span>• Official Correspondence •</span>
-                    <span>Ref: IR-DIP-2026-X</span>
-                </div>
+                {/* Content Body */}
+                <article className="relative z-20 font-serif leading-loose text-gray-800 text-lg text-justify px-4 md:px-8 tracking-wide space-y-6">
+                    {children}
+                </article>
+
+                {/* Footer */}
+                <footer className="absolute bottom-0 left-0 right-0 p-12">
+                    <div className="flex justify-between items-end">
+                        <div className="text-center">
+                            <div className="w-32 h-16 relative mb-2 opacity-80">
+                                {/* Simulated Signature */}
+                                <svg viewBox="0 0 200 100" className="w-full h-full text-blue-900" fill="none" stroke="currentColor" strokeWidth="2">
+                                    <path d="M20,50 Q50,20 80,50 T150,50" />
+                                </svg>
+                            </div>
+                            <div className="border-t border-gray-300 w-48 mx-auto -mt-4 mb-2"></div>
+                            <p className="text-xs font-bold uppercase tracking-widest text-gray-600">Secretary of Foreign Affairs</p>
+                        </div>
+
+                        <div className="text-right">
+                            <div className="w-20 h-20 border-4 border-[#c5a059]/30 rounded-full flex items-center justify-center p-1 rotate-12 opacity-80 mix-blend-multiply">
+                                <div className="w-full h-full border border-[#c5a059] rounded-full flex items-center justify-center text-[8px] text-[#c5a059] font-bold uppercase tracking-tighter text-center leading-tight">
+                                    Official<br />Seal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-8 text-center text-[9px] text-gray-400 font-mono uppercase tracking-[0.2em] border-t border-gray-100 pt-4">
+                        Lion & Sun Opposition • Global Diplomatic Network • Secure Transmission
+                    </div>
+                </footer>
             </div>
         </div>
     )

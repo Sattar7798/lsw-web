@@ -8,12 +8,13 @@ export function middleware(request: NextRequest) {
     // محافظت در برابر XSS و injection attacks
     const cspHeader = `
         default-src 'self';
-        script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google.com https://www.gstatic.com;
+        script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://unpkg.com blob:;
+        worker-src 'self' blob: https://unpkg.com;
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         img-src 'self' data: https: blob: https://www.transparenttextures.com;
         font-src 'self' https://fonts.gstatic.com;
-        connect-src 'self' https://api.telegram.org https://www.google.com https://www.gstatic.com https://www.transparenttextures.com;
-        frame-src 'self' https://www.google.com;
+        connect-src 'self' https://api.telegram.org https://www.google.com https://www.gstatic.com https://www.transparenttextures.com https://unpkg.com;
+        frame-src 'self' https://www.google.com https://view.officeapps.live.com;
         object-src 'none';
         base-uri 'self';
         form-action 'self';

@@ -61,9 +61,9 @@ export default function NewsPage() {
                                     <p className="text-gray-300 text-lg md:text-xl line-clamp-2 md:line-clamp-3 mb-8 pl-8 border-r-2 border-matte-gold/50">
                                         {featuredNews.summary}
                                     </p>
-                                    <div className="flex items-center text-matte-gold font-bold">
-                                        ادامه مطلب <span className="mr-2 text-xl">←</span>
-                                    </div>
+                                    <span className="flex items-center text-matte-gold font-bold">
+                                        مطالعه کامل بیانیه و اسلایدها <span className="mr-2 text-xl">←</span>
+                                    </span>
                                 </div>
                             </div>
                         </Link>
@@ -77,8 +77,8 @@ export default function NewsPage() {
                             key={cat}
                             onClick={() => setFilter(cat as Category | 'all')}
                             className={`px-6 py-2 rounded-full border transition-all duration-300 ${filter === cat
-                                    ? 'bg-matte-gold text-charcoal border-matte-gold font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]'
-                                    : 'bg-transparent text-gray-400 border-white/10 hover:border-matte-gold/50 hover:text-white'
+                                ? 'bg-matte-gold text-charcoal border-matte-gold font-bold shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+                                : 'bg-transparent text-gray-400 border-white/10 hover:border-matte-gold/50 hover:text-white'
                                 }`}
                         >
                             {cat === 'all' ? 'همه مطالب' : cat}

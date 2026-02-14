@@ -36,13 +36,13 @@ export default function LibraryPage() {
                         transition={{ duration: 0.8 }}
                         className="inline-block mb-6"
                     >
-                        <div className="w-28 h-28 mx-auto border-4 border-[#c5a059]/40 rounded-full flex items-center justify-center bg-black/50 backdrop-blur-sm relative shadow-2xl overflow-hidden group transition-all hover:border-[#c5a059] hover:shadow-[0_0_30px_rgba(197,160,89,0.3)]">
+                        <div className="w-32 h-32 mx-auto border border-[#c5a059]/40 flex items-center justify-center bg-black/50 backdrop-blur-sm relative shadow-2xl overflow-hidden group transition-all hover:border-[#c5a059] hover:shadow-[0_0_30px_rgba(197,160,89,0.3)] rounded-xl">
                             <div className="absolute inset-0 bg-gradient-to-tr from-[#c5a059]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                             <Image
                                 src="/logo.jpg"
                                 alt="هویت ملی"
                                 fill
-                                className="object-cover scale-110 hover:scale-125 transition-transform duration-700"
+                                className="object-contain scale-90 hover:scale-105 transition-transform duration-700"
                             />
                         </div>
                     </motion.div>
