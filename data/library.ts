@@ -6,58 +6,70 @@ export interface Book {
     coverColor: string;
     category: 'History' | 'Politics' | 'Literature' | 'Philosophy';
     description: string;
-    downloadUrl?: string;
+    downloadUrl?: string; // PDF link
+    coverImage?: string; // Optional custom cover
     isForbidden?: boolean;
 }
 
 export const libraryData: Book[] = [
     {
         id: '1',
-        title: 'تاریخ انقلاب مشروطه',
-        author: 'احمد کسروی',
-        publishDate: '۱۳۱۹',
-        coverColor: 'bg-[#8B0000]',
+        title: 'برخیز و اول تو بکش',
+        author: 'رونین برگمن',
+        publishDate: '۲۰۱۸',
+        coverColor: 'bg-[#8B0000]', // Fallback
         category: 'History',
-        description: 'روایتی دقیق از تلاش‌های مشروطه‌خواهان.',
+        description: 'تاریخ پنهان ترورهای هدفمند اسرائیل.',
         isForbidden: true,
+        coverImage: '/RiseandKill First.jpg',
+        downloadUrl: '/rise-and-kill-first.pdf',
     },
     {
         id: '2',
-        title: 'غروب بت‌ها',
-        author: 'فریدریش نیچه',
-        publishDate: '۱۸۸۹',
-        coverColor: 'bg-[#2F4F4F]',
-        category: 'Philosophy',
-        description: 'نقد بت‌های قدیمی و ساختارهای اخلاقی سنتی.',
+        title: 'خطی در شن',
+        author: 'جیمز بار',
+        publishDate: '۲۰۱۱',
+        coverColor: 'bg-[#C19A6B]', // Desert/Sand color
+        category: 'History',
+        description: 'رقابت بریتانیا و فرانسه برای شکل‌دهی خاورمیانه.',
+        isForbidden: true,
+        coverImage: '/alineinthesand.jpg',
+        downloadUrl: '/alineinthesand.pdf',
     },
     {
         id: '3',
-        title: 'دو قرن سکوت',
-        author: 'عبدالحسین زرین‌کوب',
-        publishDate: '۱۳۳۰',
-        coverColor: 'bg-[#191970]',
-        category: 'History',
-        description: 'بررسی تاریخ ایران در دو قرن اول اسلام.',
+        title: 'مبارزه با تروریسم',
+        author: 'بنیامین نتانیاهو',
+        publishDate: '۱۹۹۵',
+        coverColor: 'bg-[#191970]', // Midnight Blue
+        category: 'Politics',
+        description: 'چگونه دموکراسی‌ها می‌توانند شبکه تروریسم را شکست دهند.',
         isForbidden: true,
+        coverImage: '/fightingterrorism.jpg',
+        downloadUrl: '/fightingterrorism.pdf',
     },
     {
         id: '4',
-        title: 'بوف کور',
-        author: 'صادق هدایت',
-        publishDate: '۱۳۱۵',
-        coverColor: 'bg-[#000000]',
-        category: 'Literature',
-        description: 'شاهکار ادبیات سورئال ایران.',
+        title: 'استراتژی ایران برای سلطه',
+        author: 'سرلشکر ایال ضمیر',
+        publishDate: '۲۰۲۲',
+        coverColor: 'bg-[#2F4F4F]', // Dark Slate Gray
+        category: 'Politics',
+        description: 'تحلیل عمیق دکترین نظامی و نفوذ منطقه‌ای جمهوری اسلامی.',
         isForbidden: true,
+        coverImage: '/theiranianstrategyforhegemony.jpg',
+        downloadUrl: '/theiranianstrategyforhegemony.pdf',
     },
     {
         id: '5',
-        title: 'پاسخ به تاریخ',
-        author: 'محمدرضا پهلوی',
-        publishDate: '۱۳۵۸',
-        coverColor: 'bg-[#DAA520]',
+        title: 'شطرنج‌باز بزرگ',
+        author: 'زبیگنیو برژینسکی',
+        publishDate: '۱۹۹۷',
+        coverColor: 'bg-[#000000]', // Black
         category: 'Politics',
-        description: 'خاطرات و تحلیل‌های آخرین شاه ایران.',
+        description: 'اولویت‌های استراتژیک آمریکا و ژئوپلیتیک اوراسیا.',
         isForbidden: true,
+        coverImage: '/thegrandchessboard.jpg',
+        downloadUrl: '/thegrandchessboard.pdf',
     },
 ];

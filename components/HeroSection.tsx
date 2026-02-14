@@ -130,29 +130,22 @@ export default function HeroSection() {
                         <Link href="/leader" className="col-span-1 md:col-span-2 lg:col-span-1 group relative overflow-hidden rounded-xl bg-gradient-to-b from-matte-gold to-amber-600 p-[1px] shadow-lg shadow-amber-500/20 hover:shadow-amber-500/40 transition-all duration-300">
                             <span className="absolute inset-[-1000%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)] opacity-0 group-hover:opacity-30" />
                             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-xl bg-charcoal/20 backdrop-blur-sm px-8 py-4 text-xl font-bold text-white transition-all group-hover:bg-transparent">
-                                <span className="relative flex items-center gap-2">
-                                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                    </svg>
-                                    آشنایی با رهبر
-                                </span>
+                                آشنایی با رهبر
                             </span>
                         </Link>
 
                         {/* Secondary Actions */}
                         <Link href="/iran-map" className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-white transition-all hover:bg-white/10 hover:border-matte-gold/50 hover:scale-105 active:scale-95">
-                            <div className="relative z-10 flex items-center gap-3">
-                                <span className="text-xl">🚩</span>
+                            <div className="relative z-10 flex items-center justify-center w-full font-bold">
+
                                 <span className="font-bold">شبکه شیر و خورشید</span>
                             </div>
                             <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-shine" />
                         </Link>
 
                         <Link href="/vision" className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 px-8 py-4 text-white transition-all hover:bg-white/10 hover:border-matte-gold/50 hover:scale-105 active:scale-95">
-                            <div className="flex items-center justify-center gap-2 font-bold text-lg">
-                                <svg className="w-5 h-5 text-matte-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                            <div className="flex items-center justify-center w-full font-bold text-lg">
+
                                 چشم‌انداز
                             </div>
                         </Link>

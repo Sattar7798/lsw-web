@@ -59,10 +59,6 @@ export default function CabinetPage() {
                         className="text-xl text-[#8a8175] max-w-2xl mx-auto font-light tracking-wide leading-relaxed relative z-10"
                     >
                         ساختار اجرایی حزب ملی برای مدیریت دوران گذار.
-                        <br />
-                        <span className="text-red-900/60 text-sm mt-2 block font-mono tracking-widest uppercase">
-                            [ CONFIDENTIAL - LEVEL 4 CLEARANCE ]
-                        </span>
                     </motion.p>
                 </div>
 

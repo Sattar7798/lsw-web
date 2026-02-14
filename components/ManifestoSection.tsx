@@ -71,12 +71,12 @@ export default function ManifestoSection() {
                         className="grid md:grid-cols-3 gap-8 mt-20"
                     >
                         {[
-                            { title: "اتحاد ملی", icon: "🤝", desc: "همبستگی تمام اقوام و اقشار ایرانی زیر یک پرچم" },
-                            { title: "اصالت فرهنگی", icon: "🏛️", desc: "احیای فرهنگ و تمدن باشکوه ایران‌زمین" },
-                            { title: "آینده‌ای روشن", icon: "🌅", desc: "توسعه، رفاه و آزادی برای نسل‌های آینده" }
+                            { title: "اتحاد ملی", desc: "همبستگی تمام اقوام و اقشار ایرانی زیر یک پرچم" },
+                            { title: "اصالت فرهنگی", desc: "احیای فرهنگ و تمدن باشکوه ایران‌زمین" },
+                            { title: "آینده‌ای روشن", desc: "توسعه، رفاه و آزادی برای نسل‌های آینده" }
                         ].map((item, i) => (
-                            <div key={i} className="glass p-8 rounded-2xl border-t border-matte-gold/20 hover:border-matte-gold/50 transition-colors group">
-                                <div className="text-4xl mb-4 grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110">{item.icon}</div>
+                            <div key={i} className="glass p-8 rounded-2xl border-t border-matte-gold/20 hover:border-matte-gold/50 transition-colors group flex flex-col items-center justify-center text-center h-full">
+
                                 <h3 className="text-xl font-bold text-matte-gold mb-3">{item.title}</h3>
                                 <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
                             </div>

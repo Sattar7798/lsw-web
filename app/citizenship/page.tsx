@@ -44,21 +44,42 @@ export default function CitizenshipPage() {
 
     const downloadCard = async () => {
         if (!cardRef.current) return;
+
         try {
-            const html2canvas = (await import('html2canvas')).default;
-            const canvas = await html2canvas(cardRef.current, {
-                scale: 3, // High Res for social media
-                backgroundColor: null,
-                useCORS: true,
-                logging: false,
-            } as any);
+            setIsGenerating(true);
+            const { toPng } = await import('html-to-image');
+
+            // Wait for fonts to load
+            await document.fonts.ready;
+
+            const dataUrl = await toPng(cardRef.current, {
+                cacheBust: true,
+                pixelRatio: 4, // High quality
+                quality: 1.0,
+                filter: (node: HTMLElement) => {
+                    // Exclude glitchy elements
+                    if (node.classList && node.classList.contains('glare-effect')) return false;
+                    return true;
+                },
+                style: {
+                    // Force fonts and direction
+                    fontFeatureSettings: '"liga" 0',
+                    textRendering: 'geometricPrecision',
+                    direction: 'rtl',
+                    textAlign: 'right'
+                }
+            });
+
             const link = document.createElement('a');
             link.download = `ParsID-${formData.name.replace(/\s+/g, '_')}.png`;
-            link.href = canvas.toDataURL('image/png');
+            link.href = dataUrl;
             link.click();
+
+            setIsGenerating(false);
         } catch (err) {
             console.error('Download failed', err);
             alert('دانلود انجام نشد. لطفا مجددا تلاش کنید.');
+            setIsGenerating(false);
         }
     };
 
