@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+import JsonLd from '@/components/JsonLd'
 import './globals.css'
 import NavigationMenu from '@/components/NavigationMenu'
 import ReCaptchaProvider from '@/components/ReCaptchaProvider'
@@ -19,14 +20,22 @@ const lalezar = Lalezar({
     variable: '--font-lalezar',
 })
 
+export const viewport: Viewport = {
+    themeColor: '#0a0a0a',
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+}
+
 export const metadata: Metadata = {
+    metadataBase: new URL('https://lionandsun.com'),
     title: {
         default: 'اپوزیسیون شیر و خورشید | نماد مبارزه برای ایران آزاد',
         template: '%s | اپوزیسیون شیر و خورشید'
     },
     description: 'وبسایت رسمی اپوزیسیون شیر و خورشید - نماد مبارزه برای ایران آزاد، مستقل و متحد. پیام ما برای تحول دموکراتیک و حفظ هویت ملی ایران',
-    keywords: ['ایران', 'اپوزیسیون', 'شیر و خورشید', 'آزادی', 'دموکراسی', 'حقوق بشر', 'تحول', 'Lion and Sun', 'Iran Opposition'],
-    authors: [{ name: 'اپوزیسیون شیر و خورشید' }],
+    keywords: ['ایران', 'اپوزیسیون', 'شیر و خورشید', 'آزادی', 'دموکراسی', 'حقوق بشر', 'تحول', 'Lion and Sun', 'Iran Opposition', 'سکولاریسم', 'تمامیت ارضی'],
+    authors: [{ name: 'اپوزیسیون شیر و خورشید', url: 'https://lionandsun.com' }],
     creator: 'اپوزیسیون شیر و خورشید',
     publisher: 'اپوزیسیون شیر و خورشید',
     robots: {
@@ -43,16 +52,16 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'fa_IR',
-        url: 'https://yourdomain.com',
+        url: 'https://lionandsun.com',
         siteName: 'اپوزیسیون شیر و خورشید',
-        title: 'اپوزیسیون شیر و خورشید | نماد مبارزه برای ایران آزاد',
-        description: 'وبسایت رسمی اپوزیسیون شیر و خورشید - نماد مبارزه برای ایران آزاد، مستقل و متحد',
+        title: 'اپوزیسیون شیر و خورشید',
+        description: 'نماد مبارزه برای ایران آزاد، مستقل و متحد',
         images: [
             {
                 url: '/og-image.jpg',
                 width: 1200,
                 height: 630,
-                alt: 'اپوزیسیون شیر و خورشید',
+                alt: 'شیر و خورشید - نماد ملی',
             },
         ],
     },
@@ -60,16 +69,11 @@ export const metadata: Metadata = {
         card: 'summary_large_image',
         title: 'اپوزیسیون شیر و خورشید',
         description: 'نماد مبارزه برای ایران آزاد، مستقل و متحد',
-        images: ['/twitter-image.jpg'],
+        images: ['/twitter-image.jpg'], // Make sure to add this image later or reuse logo
         creator: '@SamanthaIrani2',
     },
-    verification: {
-        // Add your verification codes here when available
-        // google: 'your-google-verification-code',
-        // yandex: 'your-yandex-verification-code',
-    },
     alternates: {
-        canonical: 'https://yourdomain.com',
+        canonical: 'https://lionandsun.com',
     },
     manifest: '/manifest.json',
     appleWebApp: {
@@ -79,9 +83,6 @@ export const metadata: Metadata = {
     },
     formatDetection: {
         telephone: false,
-    },
-    other: {
-        'mobile-web-app-capable': 'yes',
     },
 }
 
@@ -96,6 +97,7 @@ export default function RootLayout({
     return (
         <html lang="fa" dir="rtl" className={`${vazirmatn.variable} ${lalezar.variable}`}>
             <body className="font-sans antialiased">
+                <JsonLd />
                 <ServiceWorkerRegister />
                 <SafeModeProvider>
                     <ClientProviders>

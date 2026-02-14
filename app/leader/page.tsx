@@ -35,9 +35,11 @@ export default function LeaderPage() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
-                            className="text-xl text-marble-white/80 max-w-2xl mx-auto font-light leading-relaxed"
+                            className="text-2xl md:text-3xl text-matte-gold max-w-2xl mx-auto font-bold leading-relaxed tracking-wide drop-shadow-md"
                         >
-                            نماد اتحاد، آزادی و دموکراسی سکولار برای آینده ایران
+                            پرچم کفن ماست
+                            <br />
+                            فخر وطن ماست
                         </motion.p>
                     </div>
 
