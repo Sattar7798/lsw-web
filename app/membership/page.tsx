@@ -183,7 +183,7 @@ export default function MembershipPage() {
                                                 backgroundColor: '#0f0f0f', // Explicit background color
                                                 logging: false,
                                                 useCORS: true, // For images
-                                                onclone: (clonedDoc) => {
+                                                onclone: (clonedDoc: any) => {
                                                     const glare = clonedDoc.querySelector('.glare-effect') as HTMLElement
                                                     if (glare) glare.style.display = 'none'
                                                 }
