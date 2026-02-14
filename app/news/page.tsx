@@ -46,8 +46,18 @@ export default function NewsPage() {
                         <Link href={`/news/${featuredNews.slug}`} className="block group">
                             <div className="relative rounded-3xl overflow-hidden border border-matte-gold/20 aspect-[21/9] md:aspect-[2.5/1]">
                                 {/* Background Image/Gradient */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-black via-charcoal/80 to-transparent z-10"></div>
-                                <div className="absolute inset-0 bg-gradient-to-br from-matte-gold/10 to-purple-900/20 z-0"></div>
+                                {/* Background Image/Gradient */}
+                                {featuredNews.image && (
+                                    <div className="absolute inset-0 z-0">
+                                        <div className="absolute inset-0 bg-black/60 z-10"></div> {/* Overlay for readability */}
+                                        <img
+                                            src={featuredNews.image}
+                                            alt={featuredNews.title}
+                                            className="w-full h-full object-cover opacity-50"
+                                        />
+                                    </div>
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-r from-black via-charcoal/90 to-transparent z-10"></div>
 
                                 <div className="absolute inset-0 z-20 p-8 md:p-16 flex flex-col justify-center max-w-4xl">
                                     <div className="mb-4">

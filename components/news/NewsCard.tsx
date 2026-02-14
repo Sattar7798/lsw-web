@@ -32,10 +32,19 @@ export default function NewsCard({ news, index }: NewsCardProps) {
                     {/* Image Container */}
                     <div className="relative h-48 w-full overflow-hidden">
                         <div className="absolute inset-0 bg-charcoal/20 z-10 group-hover:bg-transparent transition-colors duration-500"></div>
-                        {/* Placeholder for image - since we don't have real images yet, use a gradient or fallback */}
-                        <div className="w-full h-full bg-gradient-to-br from-gray-800 to-black group-hover:scale-110 transition-transform duration-700 flex items-center justify-center">
-                            <span className="text-4xl opacity-20">📰</span>
-                        </div>
+                        {news.image ? (
+                            <div className="w-full h-full relative">
+                                <img
+                                    src={news.image}
+                                    alt={news.title}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                />
+                            </div>
+                        ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-gray-800 to-black group-hover:scale-110 transition-transform duration-700 flex items-center justify-center">
+                                <span className="text-4xl opacity-20">📰</span>
+                            </div>
+                        )}
 
                         {/* Category Badge */}
                         <div className={`absolute top-4 right-4 z-20 px-3 py-1 rounded-full text-xs font-bold border backdrop-blur-md ${categoryColors[news.category]}`}>
