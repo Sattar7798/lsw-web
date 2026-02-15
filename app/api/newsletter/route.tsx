@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { EmailTemplate } from '@/components/EmailTemplate';
 import { render } from '@react-email/render';
+import { redis } from '@/lib/redis';
 
 export const runtime = 'edge';
 
@@ -16,6 +17,9 @@ export async function POST(request: Request) {
     }
 
     const adminEmail = process.env.ADMIN_EMAIL || 'hedayatsattar@gmail.com';
+
+    // Store subscriber in Redis
+    await redis.sadd('subscribers', email);
 
     const emailContent = await render(
       <EmailTemplate
