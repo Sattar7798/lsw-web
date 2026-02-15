@@ -1,9 +1,9 @@
-
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { redis } from '@/lib/redis';
 import { EmailTemplate } from '@/components/EmailTemplate';
 import { render } from '@react-email/render';
+import React from 'react';
 
 export const runtime = 'edge';
 
