@@ -28,14 +28,14 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-    metadataBase: new URL('https://lionandsun.com'),
+    metadataBase: new URL('https://lionandsunopposition.com'),
     title: {
         default: 'اپوزیسیون شیر و خورشید | نماد مبارزه برای ایران آزاد',
         template: '%s | اپوزیسیون شیر و خورشید'
     },
     description: 'وبسایت رسمی اپوزیسیون شیر و خورشید - نماد مبارزه برای ایران آزاد، مستقل و متحد. پیام ما برای تحول دموکراتیک و حفظ هویت ملی ایران',
     keywords: ['ایران', 'اپوزیسیون', 'شیر و خورشید', 'آزادی', 'دموکراسی', 'حقوق بشر', 'تحول', 'Lion and Sun', 'Iran Opposition', 'سکولاریسم', 'تمامیت ارضی'],
-    authors: [{ name: 'اپوزیسیون شیر و خورشید', url: 'https://lionandsun.com' }],
+    authors: [{ name: 'اپوزیسیون شیر و خورشید', url: 'https://lionandsunopposition.com' }],
     creator: 'اپوزیسیون شیر و خورشید',
     publisher: 'اپوزیسیون شیر و خورشید',
     robots: {
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: 'website',
         locale: 'fa_IR',
-        url: 'https://lionandsun.com',
+        url: 'https://lionandsunopposition.com',
         siteName: 'اپوزیسیون شیر و خورشید',
         title: 'اپوزیسیون شیر و خورشید',
         description: 'نماد مبارزه برای ایران آزاد، مستقل و متحد',
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
         creator: '@SamanthaIrani2',
     },
     alternates: {
-        canonical: 'https://lionandsun.com',
+        canonical: 'https://lionandsunopposition.com',
     },
     manifest: '/manifest.json',
     appleWebApp: {

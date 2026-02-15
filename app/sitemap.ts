@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { newsData } from '@/data/news'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://lionandsun.com'
+    const baseUrl = 'https://lionandsunopposition.com'
 
     // Static Routes
     const routes = [
