@@ -134,7 +134,7 @@ export default function Footer() {
                             {[
                                 { name: 'اسناد رسمی', href: '/documents' },
                                 { name: 'بیانیه‌ها', href: '/news' },
-                                { name: 'عضویت', href: '/membership' },
+                                { name: 'عضویت', href: '/citizenship' },
                                 { name: 'حریم خصوصی', href: '/legal/privacy' },
                                 { name: 'قوانین و شرایط', href: '/legal/terms' },
                                 { name: 'کوکی‌ها', href: '/legal/cookies' }
