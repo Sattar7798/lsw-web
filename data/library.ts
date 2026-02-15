@@ -21,7 +21,7 @@ export const libraryData: Book[] = [
         category: 'History',
         description: 'تاریخ پنهان ترورهای هدفمند اسرائیل.',
         isForbidden: true,
-        coverImage: '/RiseandKill First.jpg',
+        coverImage: '/rise-and-kill-first.jpg',
         downloadUrl: '/rise-and-kill-first.pdf',
     },
     {
