@@ -9,9 +9,8 @@ export async function POST(request: NextRequest) {
     try {
         const { name, email, message, recaptchaToken } = await request.json()
 
-        // Validate and sanitize input (Basic check since 'validator' lib might be heavy/node-specific)
-        // For Edge, we keep it simple or use lightweight regex
-        if (!name || !email || !message) {
+        // Validate and sanitize input (email is optional now)
+        if (!name || !message) {
             return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
         }
 
