@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
         // Telegram Bot Configuration
         const botToken = process.env.TELEGRAM_BOT_TOKEN
         const chatId = process.env.TELEGRAM_CHAT_ID
+        const channelId = process.env.TELEGRAM_CHANNEL_ID
 
         if (!botToken || !chatId) {
             return NextResponse.json(
@@ -30,14 +31,14 @@ export async function POST(request: NextRequest) {
 🔔 پیام جدید از وبسایت شیر و خورشید
 
 👤 نام: ${name}
-📧 ایمیل: ${email}
+📧 ایمیل: ${email || 'ارائه نشده'}
 
 💬 پیام:
 ${message}
         `.trim()
 
-        // Send to Telegram
-        const telegramResponse = await fetch(
+        // Send to private chat (admin notification)
+        const privateChatResponse = await fetch(
             `https://api.telegram.org/bot${botToken}/sendMessage`,
             {
                 method: 'POST',
@@ -52,14 +53,38 @@ ${message}
             }
         )
 
-        const telegramData = await telegramResponse.json()
-
-        if (!telegramResponse.ok) {
-            console.error('Telegram API error:', telegramData)
+        if (!privateChatResponse.ok) {
+            const errorData = await privateChatResponse.json()
+            console.error('Telegram private chat error:', errorData)
             return NextResponse.json(
                 { error: 'Failed to send message to Telegram' },
                 { status: 500 }
             )
+        }
+
+        // Send to public channel (if configured)
+        if (channelId) {
+            const channelResponse = await fetch(
+                `https://api.telegram.org/bot${botToken}/sendMessage`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: channelId,
+                        text: telegramMessage,
+                        parse_mode: 'HTML',
+                    }),
+                }
+            )
+
+            if (!channelResponse.ok) {
+                const channelError = await channelResponse.json()
+                console.error('Telegram channel error:', channelError)
+                // Don't fail the whole request if channel posting fails
+                // Admin still gets the message in private chat
+            }
         }
 
         return NextResponse.json(
