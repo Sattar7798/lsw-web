@@ -100,11 +100,10 @@ export default function ContactPage() {
 
                                 <div>
                                     <label className="block text-marble-white font-semibold mb-2">
-                                        ایمیل
+                                        ایمیل <span className="text-matte-gold/60 text-sm">(اختیاری)</span>
                                     </label>
                                     <input
                                         type="email"
-                                        required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         className="w-full px-4 py-3 bg-charcoal/50 border-2 border-matte-gold/30 rounded-lg text-marble-white focus:border-matte-gold outline-none transition-colors"
